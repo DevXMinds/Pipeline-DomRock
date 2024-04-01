@@ -1,3 +1,4 @@
+![Realizar carga (2)](https://github.com/DevXMinds/Pipeline-DomRock/assets/111454312/f3e7823e-a530-45c3-916d-23daf84ceec0)
 <br id="topo">
 <p align="center">
     <a href="#sobre">Projeto</a>  |
