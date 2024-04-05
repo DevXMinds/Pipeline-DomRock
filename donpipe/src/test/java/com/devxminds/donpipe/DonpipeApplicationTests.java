@@ -1,10 +1,10 @@
-package com.devminds.csvtojson;
+package com.devxminds.donpipe;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CsvtojsonApplicationTests {
+class DonpipeApplicationTests {
 
 	@Test
 	void contextLoads() {
