@@ -1,15 +1,13 @@
-package com.devminds.csvtojson;
+package com.devxminds.donpipe;
 
-import com.devminds.csvtojson.controller.ConversaoController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CsvtojsonApplication {
+public class DonpipeApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ConversaoController.class, args);
-
+		SpringApplication.run(DonpipeApplication.class, args);
 	}
 
 }
