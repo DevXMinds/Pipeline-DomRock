@@ -7,6 +7,8 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import jakarta.persistence.Column;
 import jakarta.persistence.GenerationType;
+import lombok.*;
+
 
 /**
  * A classe Arquivo representa arquivos armazenados no banco de dados.
@@ -19,6 +21,10 @@ import jakarta.persistence.GenerationType;
  * @version 0.1
  */
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "ARQUIVO", schema = "API_BD3")
 public class Arquivo {
@@ -31,15 +37,9 @@ public class Arquivo {
     @Column(name = "id")
     private Long id;
 
-    /**
-     * Nome do arquivo
-     */
     @Column(name = "nome_arquivo", length = 100)
     private String name;
 
-    /**
-     * Tipo do arquivo
-     */
     @Column(name = "tipo_arquivo")
     private String type;
     /**
@@ -48,37 +48,5 @@ public class Arquivo {
      */
     @Lob
     @Column(name = "dados_arquivo")
-    private byte[] data;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public byte[] getData() {
-        return data;
-    }
-
-    public void setData(byte[] data) {
-        this.data = data;
-    }
+    private String data;
 }
