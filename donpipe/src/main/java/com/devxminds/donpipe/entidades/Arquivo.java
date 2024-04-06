@@ -48,7 +48,14 @@ public class Arquivo {
      */
     @Lob
     @Column(name = "dados_arquivo")
-    private byte[] data;
+    private String data;
+
+    public Arquivo(Long id, String name, String type, String data) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.data = data;
+    }
 
     public Long getId() {
         return id;
@@ -74,11 +81,11 @@ public class Arquivo {
         this.type = type;
     }
 
-    public byte[] getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(byte[] data) {
+    public void setData(String data) {
         this.data = data;
     }
 }
