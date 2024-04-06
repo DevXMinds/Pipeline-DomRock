@@ -9,6 +9,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.GenerationType;
 import lombok.*;
 
+
 /**
  * A classe Arquivo representa arquivos armazenados no banco de dados.
  * Cada instância desta classe contém informações sobre um arquivo,
@@ -41,12 +42,11 @@ public class Arquivo {
 
     @Column(name = "tipo_arquivo")
     private String type;
-
     /**
      * Os dados do arquivo como um array de bytes. Não pode ser nulo.
      * Utiliza-se a anotação '@Lob' para indicar que é um objeto grande.
      */
     @Lob
     @Column(name = "dados_arquivo")
-    private byte[] data;
+    private String data;
 }
