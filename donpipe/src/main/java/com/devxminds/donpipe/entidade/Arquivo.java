@@ -1,4 +1,4 @@
-package com.devxminds.donpipe.entidades;
+package com.devxminds.donpipe.entidade;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,7 +33,7 @@ public class Arquivo {
      * É gerado automaticamente pelo banco de dados.
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")
     private Long id;
 
@@ -49,4 +49,16 @@ public class Arquivo {
     @Lob
     @Column(name = "dados_arquivo")
     private String data;
+
+    /**
+     * Construtor sem ID que será gerado sequencialmente
+     * @param fileName nome do arquivo
+     * @param contentType tipo do arquivo
+     * @param content conteúdo do arquivo em String
+     */
+    public Arquivo(String fileName, String contentType, String content) {
+        this.name = fileName;
+        this.type = contentType;
+        this.data = content;
+    }
 }

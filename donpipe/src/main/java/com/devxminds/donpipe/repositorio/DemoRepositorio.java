@@ -1,4 +1,4 @@
-package com.devxminds.donpipe.entidades;
+package com.devxminds.donpipe.repositorio;
 
 public interface DemoRepositorio<T> {
     public void save(T t);

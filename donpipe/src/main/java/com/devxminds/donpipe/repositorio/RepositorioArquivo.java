@@ -1,6 +1,6 @@
-package com.devxminds.donpipe.entidades;
+package com.devxminds.donpipe.repositorio;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.devxminds.donpipe.entidade.Arquivo;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
