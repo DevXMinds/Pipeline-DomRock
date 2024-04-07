@@ -1,0 +1,200 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+header {
+    position: relative;
+    color: #000;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.header-line {
+    position: absolute;
+    top: 175px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 1px;
+    background-color: #000;
+}
+
+.corner-dot {
+    position: absolute;
+    top: 75px;
+    left: 30px;
+    width: 100px;
+    height: 100px;
+    background-color: gray;
+    border-radius: 50%;
+}
+
+.menu-btn {
+    position: absolute;
+    top: 75px;
+    right: 30px;
+    width: 100px;
+    height: 100px;
+    background: transparent;
+    color: #000;
+    border: none;
+    cursor: pointer;
+}
+
+.menu-btn .material-icons {
+    font-size: 100px;
+}
+
+.logout-btn {
+    padding: 10px 20px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.logout-btn:hover {
+    background-color: #c82333;
+}
+
+.fixarRodape {
+    bottom: 20px;
+    position: fixed;
+    width: 100%;
+    text-align: center;
+}
+
+.realizar-carga-btn {
+    padding: 15px 30px;
+    background-color: #9e9e9e;
+    color: #000;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    border-radius: 20px;
+    width: auto;
+}
+
+.material-icons {
+    vertical-align: middle;
+    color: #000;
+}
+
+.painel {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 80%;
+    max-width: 100%;
+    height: 90%;
+    max-height: 80%;
+    overflow-y: auto;
+}
+
+.excel-container {
+    overflow: auto;
+    height: 80%;
+}
+
+.excel-table {
+    width: 100%;
+    height: 80%;
+    margin-bottom: 20px;
+}
+
+.excel-table th:hover .material-icons {
+    background-color: yellow;
+    border-radius: 50%;
+    padding: 1px;
+}
+
+.excel-table th{
+    background-color: rgb(13, 97, 222);
+}
+.excel-table td {
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+
+.excel-table td {
+    text-align: center;
+}
+
+.painel-botoes {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.botao-confirmar,
+.botao-cancelar {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.botao-confirmar {
+    background-color: #28a745;
+    color: white;
+}
+
+.botao-cancelar {
+    background-color: #dc3545;
+    color: white;
+}
+
+.menu-panel {
+    position: absolute;
+    top: 150px;
+    right: 0;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    display: none;
+    z-index: 1000;
+    margin-top: 5px;
+    width: 200px;
+}
+
+.menu-panel ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.menu-panel ul li {
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.menu-panel ul li a,
+.menu-panel ul li button {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.3s;
+}
+
+.menu-panel ul li a:hover,
+.menu-panel ul li button:hover {
+    background-color: #cceeff;
+}
+
+.menu-panel ul li button#logout-btn:hover {
+    color: #fff;
+}
