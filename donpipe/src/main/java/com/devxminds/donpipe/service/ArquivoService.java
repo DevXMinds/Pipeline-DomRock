@@ -1,16 +1,13 @@
 package com.devxminds.donpipe.service;
 
+import com.devxminds.donpipe.dto.ArquivoDto;
 import com.devxminds.donpipe.entidade.Arquivo;
-import com.devxminds.donpipe.repositorio.ArquivoRepository;
-import com.devxminds.donpipe.repositorio.RepositorioArquivo;
+import com.devxminds.donpipe.repositorios.ArquivoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.Objects;
 import java.util.stream.Stream;
 
 /**
@@ -18,29 +15,37 @@ import java.util.stream.Stream;
  * para entidades Arquivo no Repositório ArquivoRepository.
  *
  * @author AndreWakugawa
- * @version 0.1
+ * @version 0.2
  */
 @Service
 public class ArquivoService {
     @Autowired
-    private ArquivoRepository arquivoRepository;
-
+    public ArquivoRepository arquivoRepository;
 //    @Autowired
 //    private RepositorioArquivo repositorioArquivo;
 
     /**
      * Armazena uma entidade Arquivo recebida como MultipartFile.
-     * @param file arquivo Multipart
-     * @return adiciona um Arquivo ao repositório
+     * @param file objeto ArquivoDTO, desserialização do JSON recebido.
+     * @return retorna o objeto Arquivo com os atributos do DTO serializado.
      * @throws IOException falha de leitura ou busca
      */
-    public Arquivo store(MultipartFile file) throws IOException {
-        String content = new String(file.getBytes());
-        String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
-        Arquivo arquivo = new Arquivo(fileName, file.getContentType(), content);
-
-//        return repositorioArquivo.save(arquivo);
-        return arquivoRepository.save(arquivo);
+    public Arquivo store(ArquivoDto file) throws IOException {
+        Arquivo arquivo = new Arquivo(
+                file.getId(),
+                file.getIdUser(),
+                file.getIdEmpresa(),
+                file.getTipoArquivo(),
+                file.getDadosArquivo(),
+                file.getNomeArquivo(),
+                file.getDataCriacao(),
+                file.getEstagio(),
+                file.getEstatus(),
+                file.getDataModificacao(),
+                file.getBronzes(),
+                file.getLogs(),
+                file.getLzs());
+        return arquivo;
     }
 
     /**
