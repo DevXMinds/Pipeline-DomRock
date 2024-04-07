@@ -1,5 +1,7 @@
 package com.devxminds.donpipe;
 
+import com.devxminds.donpipe.entidade.Arquivo;
+import com.devxminds.donpipe.repositorio.RepositorioArquivo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;

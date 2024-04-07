@@ -21,7 +21,6 @@ import java.util.stream.Stream;
 public class ArquivoService {
     @Autowired
     public ArquivoRepository arquivoRepository;
-
 //    @Autowired
 //    private RepositorioArquivo repositorioArquivo;
 
@@ -47,7 +46,6 @@ public class ArquivoService {
                 file.getLogs(),
                 file.getLzs());
         return arquivo;
-
     }
 
     /**
