@@ -2,7 +2,7 @@ package com.devxminds.donpipe.service;
 
 import com.devxminds.donpipe.dto.ArquivoDto;
 import com.devxminds.donpipe.entidade.Arquivo;
-import com.devxminds.donpipe.repositorios.ArquivoRepository;
+import com.devxminds.donpipe.repositorio.ArquivoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

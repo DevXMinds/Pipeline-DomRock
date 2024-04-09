@@ -1,4 +1,4 @@
-package com.devxminds.donpipe.repositorios;
+package com.devxminds.donpipe.repositorio;
 
 import com.devxminds.donpipe.entidade.Empresa;
 import org.springframework.data.jpa.repository.JpaRepository;
