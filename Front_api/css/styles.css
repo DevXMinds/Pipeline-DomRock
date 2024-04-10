@@ -198,3 +198,11 @@ header {
 .menu-panel ul li button#logout-btn:hover {
     color: #fff;
 }
+
+.material-icons:hover {
+    cursor: pointer; /* Adiciona um cursor de apontador ao passar o mouse sobre os ícones */
+}
+
+.material-icons.selected {
+    background-color: yellow; /* Adiciona um destaque amarelo aos ícones de coluna selecionados */
+}

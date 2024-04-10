@@ -15,7 +15,6 @@
             <span class="material-icons">menu</span>
         </button>
     
-        <!-- Adicionei o menu-panel dentro do header -->
         <div id="menu-panel" class="menu-panel">
             <ul>
                 <li><a href="#">Cargas</a></li>
@@ -27,8 +26,6 @@
         </div>
     </header>
     
-    
-
     <footer class="fixarRodape">
         <button id="realizar-carga-btn" class="realizar-carga-btn">
             <span class="material-icons">upload</span> Realizar Carga
@@ -36,70 +33,9 @@
     </footer>
 
     <div id="painel" class="painel">
-        <table class="excel-table">
-            <thead>
-                <tr>
-                    <th><span class="material-icons">vpn_key</span></th>
-                    <th><span class="material-icons">vpn_key</span></th>
-                    <th><span class="material-icons">vpn_key</span></th>
-                    <th><span class="material-icons">vpn_key</span></th>
-                    <th><span class="material-icons">vpn_key</span></th>
-                    <th><span class="material-icons">vpn_key</span></th>
-                </tr>
-            </thead>
+        <table id="data-table" class="excel-table">
             <tbody>
-                <!-- 10 linhas -->
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <!-- Adicione as linhas restantes -->
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
                 
-                <!-- 8 linhas adicionais -->
             </tbody>
         </table>
         <div class="painel-botoes">
@@ -108,6 +44,7 @@
         </div>
     </div>
     
+    <input type="file" id="file-input" style="display: none;">
     <script src="js/script.js"></script>
 </body>
 </html>
