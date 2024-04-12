@@ -1,64 +1,76 @@
 package com.devxminds.donpipe.entidade;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
-import jakarta.persistence.Table;
-import jakarta.persistence.Column;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDate;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 
 /**
- * A classe Arquivo representa arquivos armazenados no banco de dados.
- * Cada instância desta classe contém informações sobre um arquivo,
- * incluindo seu nome, tipo e os dados do arquivo em si.
- *</p>
- * O atributo 'id' é a chave primária da entidade e é gerado automaticamente pelo banco de dados.
+ * Classe entidade do objeto Arquivo
+ * Referencia diretamente a tabela 'arquivo' do DB. Seus atributos contém as propriedades que as colunas
+ * da tabela tem.
+ *<p>
+ * IMPORTANTE - Ao instanciar um novo objeto Arquivo, não passar o valor do ID.
+ * Passar o valor do ID fará com que o repositório procure por um objeto já existente.
  *
- * @author Gabriel
+ * @author Caue
  * @version 0.1
  */
-
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
-@Table(name = "ARQUIVO", schema = "API_BD3")
+@Table(name = "arquivo")
 public class Arquivo {
-    /**
-     * Identificador único para o arquivo.
-     * É gerado automaticamente pelo banco de dados.
-     */
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ColumnDefault("nextval('api_bd3.arquivo_id_seq'")
+    @Column(name = "id", nullable = false)
     private Long id;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "id_user", referencedColumnName = "id", nullable = false)
+    private User idUser;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "id_empresa", referencedColumnName = "id", nullable = false)
+    private Empresa idEmpresa;
+
+    @Column(name = "tipo_arquivo", nullable = false, length = Integer.MAX_VALUE)
+    private String tipoArquivo;
+
+    @Column(name = "dados_arquivo",nullable = false,length = Integer.MAX_VALUE)
+    private String dadosArquivo;
+
     @Column(name = "nome_arquivo", length = 100)
-    private String name;
+    private String nomeArquivo;
 
-    @Column(name = "tipo_arquivo")
-    private String type;
-    /**
-     * Os dados do arquivo como um array de bytes. Não pode ser nulo.
-     * Utiliza-se a anotação '@Lob' para indicar que é um objeto grande.
-     */
-    @Lob
-    @Column(name = "dados_arquivo")
-    private String data;
+    @CreationTimestamp
+    @Column(name = "data_criacao")
+    private LocalDate dataCriacao;
 
-    /**
-     * Construtor sem ID que será gerado sequencialmente
-     * @param fileName nome do arquivo
-     * @param contentType tipo do arquivo
-     * @param content conteúdo do arquivo em String
-     */
-    public Arquivo(String fileName, String contentType, String content) {
-        this.name = fileName;
-        this.type = contentType;
-        this.data = content;
-    }
+    @Column(name = "estagio", length = Integer.MAX_VALUE)
+    private String estagio;
+
+    @Column(name = "estatus", length = Integer.MAX_VALUE)
+    private String estatus;
+
+    @Column(name = "data_modificacao")
+    private LocalDate dataModificacao;
+
+    @OneToMany(mappedBy = "idArquivo")
+    private Set<Bronze> bronzes = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "idArquivo")
+    private Set<Log> logs = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "idArquivo")
+    private Set<Lz> lzs = new LinkedHashSet<>();
+
 }
