@@ -19,7 +19,7 @@ public class Log {
     @Id
     @ColumnDefault("nextval('api_bd3.log_id_log_seq'")
     @Column(name = "id_log", nullable = false)
-    private Integer id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_user", nullable = false)

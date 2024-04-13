@@ -12,5 +12,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @version 0.1
  *
  */
-public interface EmpresaRepository extends JpaRepository<Empresa, Integer> {
+public interface EmpresaRepository extends JpaRepository<Empresa, Long> {
 }

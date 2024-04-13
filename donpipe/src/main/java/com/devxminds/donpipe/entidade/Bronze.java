@@ -19,7 +19,7 @@ public class Bronze {
     @Id
     @ColumnDefault("nextval('api_bd3.bronze_id_bronze_seq'")
     @Column(name = "id_bronze", nullable = false)
-    private Integer id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_user", nullable = false)

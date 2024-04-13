@@ -70,6 +70,7 @@ CREATE TABLE API_BD3.ARQUIVO (
     FOREIGN KEY (id_empresa) REFERENCES API_BD3.EMPRESA(id),
     tipo_arquivo varchar not null,
     dados_arquivo varchar not null,
+    data_modificacao DATE,
     nome_arquivo VARCHAR(100),
     data_criacao DATE,
     estagio VARCHAR,
