@@ -26,7 +26,6 @@ import static jakarta.persistence.Persistence.createEntityManagerFactory;
  */
 @RestController
 @RequestMapping("/arquivo")
-@SpringBootApplication
 public class ArquivoController {
     @Autowired
     private ArquivoService arquivoService;

@@ -20,7 +20,7 @@ public class Empresa {
     @Id
     @ColumnDefault("nextval('api_bd3.empresa_id_seq'")
     @Column(name = "id", nullable = false)
-    private Integer id;
+    private Long id;
 
     @Column(name = "nome", nullable = false, length = 100)
     private String nome;

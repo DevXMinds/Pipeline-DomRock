@@ -8,7 +8,7 @@ import jakarta.persistence.EntityManager;
  * para Objetos Arquivo
  *
  * @author caueh
- * @Version 0.1
+ * @Version 1.0
  */
 public class ArquivoDAO {
     private final EntityManager em;

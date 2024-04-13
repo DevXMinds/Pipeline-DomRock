@@ -12,5 +12,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @version 0.1
  *
  */
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface UserRepository extends JpaRepository<User, Long> {
 }

@@ -15,36 +15,34 @@ import java.util.stream.Stream;
  * para entidades Arquivo no Repositório ArquivoRepository.
  *
  * @author AndreWakugawa
- * @version 0.2
+ * @version 1.1
  */
 @Service
 public class ArquivoService {
     @Autowired
     public ArquivoRepository arquivoRepository;
-//    @Autowired
-//    private RepositorioArquivo repositorioArquivo;
 
     /**
-     * Armazena uma entidade Arquivo recebida como MultipartFile.
+     * Armazena uma entidade Arquivo recebida.
      * @param file objeto ArquivoDTO, desserialização do JSON recebido.
      * @return retorna o objeto Arquivo com os atributos do DTO serializado.
      * @throws IOException falha de leitura ou busca
      */
     public Arquivo store(ArquivoDto file) throws IOException {
         Arquivo arquivo = new Arquivo(
-                file.getId(),
-                file.getIdUser(),
-                file.getIdEmpresa(),
-                file.getTipoArquivo(),
-                file.getDadosArquivo(),
-                file.getNomeArquivo(),
-                file.getDataCriacao(),
-                file.getEstagio(),
-                file.getEstatus(),
-                file.getDataModificacao(),
-                file.getBronzes(),
-                file.getLogs(),
-                file.getLzs());
+                file.id(),
+                file.idUser(),
+                file.idEmpresa(),
+                file.tipoArquivo(),
+                file.dadosArquivo(),
+                file.nomeArquivo(),
+                file.dataCriacao(),
+                file.estagio(),
+                file.estatus(),
+                file.dataModificacao(),
+                file.bronzes(),
+                file.logs(),
+                file.lzs());
         return arquivo;
     }
 

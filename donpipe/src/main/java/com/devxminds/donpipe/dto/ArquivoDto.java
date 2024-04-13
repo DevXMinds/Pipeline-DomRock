@@ -10,25 +10,24 @@ import java.util.Set;
 
 /**
  * Data Transfer Object (DTO) para objetos Arquivo. Serializa Jsons em Objetos ArquivoDTO.
- *<p>
- * DTO for {@link com.devxminds.donpipe.entidade.Arquivo}
+ * <p>
+ * DTO for {@link Arquivo}
+ *
  * @author Caue
  * @version 0.1
  */
-@Value
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ArquivoDto implements Serializable {
-    Long id;
-    User idUser;
-    Empresa idEmpresa;
-    String tipoArquivo;
-    String dadosArquivo;
-    String nomeArquivo;
-    LocalDate dataCriacao;
-    String estagio;
-    String estatus;
-    LocalDate dataModificacao;
-    Set<Bronze> bronzes;
-    Set<Log> logs;
-    Set<Lz> lzs;
+public record ArquivoDto(Long id,
+                         User idUser,
+                         Empresa idEmpresa,
+                         String tipoArquivo,
+                         String dadosArquivo,
+                         String nomeArquivo,
+                         LocalDate dataCriacao,
+                         String estagio,
+                         String estatus,
+                         LocalDate dataModificacao,
+                         Set<Bronze> bronzes,
+                         Set<Log> logs,
+                         Set<Lz> lzs) implements Serializable {
 }

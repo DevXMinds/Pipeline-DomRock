@@ -17,7 +17,7 @@ public class User {
     @Id
     @ColumnDefault("nextval('api_bd3.user_id_seq'")
     @Column(name = "id", nullable = false)
-    private Integer id;
+    private Long id;
 
     @Column(name = "nome_user", nullable = false, length = 100)
     private String nomeUser;
