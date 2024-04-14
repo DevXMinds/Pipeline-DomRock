@@ -5,8 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const logoutBtn = document.getElementById('logout-btn');
     const fileInput = document.getElementById('file-input');
     const dataTableBody = document.querySelector('#data-table tbody');
-    let colunaSelecionada = -1; // Inicializado como -1 para indicar que nenhuma coluna está selecionada
-
+    let colunasSelecionadas = []; // Inicializado como uma lista vazia para armazenar múltiplas colunas selecionadas
 
     function selecionarLinha(linha) {
         var linhas = document.getElementById("minhaTabela").getElementsByTagName("tr");
@@ -23,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
             popup.style.display = "none";
         }, 2000);
     }
+
     menuBtn.addEventListener('click', (event) => {
         event.stopPropagation();
         menuPanel.style.display = (menuPanel.style.display === 'none') ? 'block' : 'none';
@@ -50,22 +50,21 @@ document.addEventListener('DOMContentLoaded', function () {
                 const fileExtension = fileName.split('.').pop().toLowerCase();
                 const rows = csvContent.split('\n');
                 const postData = {
-                    id:null,
-                    idUser:{id: 1},
-                    idEmpresa:{id: 1},
-                    tipoArquivo:fileExtension,
-                    dadosArquivo:csvContent,
-                    nomeArquivo:fileName,
-                    dataCriacao:null,
-                    estagio:"lz",
-                    estatus:"cancelado",
-                    dataModificacao:null
-                }
+                    id: null,
+                    idUser: { id: 1 },
+                    idEmpresa: { id: 1 },
+                    tipoArquivo: fileExtension,
+                    dadosArquivo: csvContent,
+                    nomeArquivo: fileName,
+                    dataCriacao: null,
+                    estagio: "lz",
+                    estatus: "cancelado",
+                    dataModificacao: null
+                };
 
                 // Send JSON data to backend
                 sendDataToBackend(postData);
             };
-
 
             reader.readAsText(file);
         }
@@ -75,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const linhas = csvContent.split('\n');
         dataTableBody.innerHTML = '';
 
-        const headers = linhas[0].split(';'); // Assume que o cabeçalho está na primeira linha e usa ';' como separador
+        const headers = linhas[0].split(';');
         const numColunas = headers.length;
 
         // Adiciona cabeçalhos à tabela
@@ -86,11 +85,10 @@ document.addEventListener('DOMContentLoaded', function () {
             icon.className = "material-icons";
             icon.textContent = 'vpn_key';
             icon.addEventListener('click', () => {
-                colunaSelecionada = index; // Armazena o índice da coluna selecionada
-                highlightColumnHeaders(); // Chama a função para destacar os cabeçalhos de coluna selecionados
+                selecionarColuna(index);
             });
-            th.appendChild(icon);
             th.textContent = header;
+            th.appendChild(icon);
             headerRow.appendChild(th);
         });
         dataTableBody.appendChild(headerRow);
@@ -98,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Adiciona dados às linhas da tabela
         for (let i = 1; i < linhas.length; i++) {
             const colunas = linhas[i].split(';');
-            if (colunas.length === numColunas) { // Verifica se o número de colunas corresponde ao cabeçalho
+            if (colunas.length === numColunas) { 
                 const tr = document.createElement('tr');
                 colunas.forEach(coluna => {
                     const td = document.createElement('td');
@@ -111,18 +109,52 @@ document.addEventListener('DOMContentLoaded', function () {
 
         painel.style.display = 'block';
     }
-
-    // Função para destacar os cabeçalhos de coluna selecionados
-    function highlightColumnHeaders() {
+// Função para destacar as colunas selecionadas na tabela
+    function highlightSelectedColumns() {
         const ths = document.querySelectorAll('#data-table th');
         ths.forEach((th, index) => {
-            if (index === colunaSelecionada) {
-                th.style.backgroundColor = 'yellow';
+            if (colunasSelecionadas.includes(index)) {
+                th.classList.add('selecionada');
             } else {
-                th.style.backgroundColor = ''; // Remove o destaque dos outros cabeçalhos
+                th.classList.remove('selecionada');
             }
         });
     }
+// Event listeners para seleção de colunas ao clicar nos cabeçalhos
+    document.querySelectorAll('#data-table th').forEach((th, index) => {
+        th.addEventListener('click', () => {
+            selecionarColuna(index);
+        });
+    });
+// Função para selecionar uma coluna
+    function selecionarColuna(index) {
+        const columnIndex = colunasSelecionadas.indexOf(index);
+        if (columnIndex === -1) {
+            colunasSelecionadas.push(index);
+        } else {
+            colunasSelecionadas.splice(columnIndex, 1);
+        }
+        highlightSelectedColumns();
+    }
+   // Função para gerar JSON com as colunas selecionadas    TA ENVIANDO OS DADOS JSON PRO CONSOLE
+    function gerarJSONColunaSelecionada(tipo) {
+        if (colunasSelecionadas.length > 0) {
+            const headers = document.querySelectorAll('#data-table th');
+            const colunasSelecionadasNomes = colunasSelecionadas.map(index => headers[index].textContent);
+            const jsonData = JSON.stringify({ "colunasSelecionadas": colunasSelecionadasNomes });
+            console.log(jsonData);
+        } else {
+            alert('Por favor, selecione uma ou mais colunas antes de prosseguir.');
+        }
+    }
+
+    document.querySelector('.botao-selecionar-pk').addEventListener('click', () => {
+        gerarJSONColunaSelecionada('PK');
+    });
+
+    document.querySelector('.botao-coluna-nao-deletavel').addEventListener('click', () => {
+        gerarJSONColunaSelecionada('Not Deletable');
+    });
 
     document.getElementById('fechar-painel').addEventListener('click', () => {
         painel.style.display = 'none';
@@ -131,7 +163,6 @@ document.addEventListener('DOMContentLoaded', function () {
     logoutBtn.addEventListener('click', () => {
         alert('Você fez logout!');
     });
-
 
     function converterCSV() {
         var fileInput = document.getElementById('csvFile');
@@ -150,6 +181,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => console.error('Erro:', error));
     }
 });
+
 function sendDataToBackend(data) {
     // You can use fetch or any other method to send data to the backend
     fetch('/arquivo/load', {
@@ -171,4 +203,3 @@ function sendDataToBackend(data) {
             console.error('Error:', error);
         });
 }
-
