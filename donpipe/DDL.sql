@@ -32,6 +32,12 @@ CREATE SCHEMA API_BD3;
 -- encriptador pgcrypto
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
+CREATE TABLE API_BD3.EMPRESA (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    setor VARCHAR(100) NOT NULL
+);
+
 CREATE TABLE API_BD3.USER (
     id SERIAL PRIMARY KEY,
     nome_user VARCHAR(100) NOT NULL,
@@ -54,13 +60,6 @@ CREATE TRIGGER encrypt_trigger
 BEFORE INSERT OR UPDATE OF senha ON API_BD3.USER
 FOR EACH ROW
 EXECUTE FUNCTION encrypt_password();
-
-
-CREATE TABLE API_BD3.EMPRESA (
-    id SERIAL PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
-    setor VARCHAR(100) NOT NULL
-);
 
 CREATE TABLE API_BD3.ARQUIVO (
     id SERIAL PRIMARY KEY,
@@ -98,12 +97,12 @@ ALTER TABLE API_BD3.ARQUIVO
 ADD CONSTRAINT CK_ARQUIVO_ESTAGIO_STATUS
 CHECK (estagio IN ('lz', 'bronze', 'silver') AND estatus IN ('concluído', 'em andamento', 'cancelado'));
 
-
 CREATE TABLE API_BD3.LZ(
+    id SERIAL PRIMARY KEY,
     id_arquivo INT NOT NULL,
     FOREIGN KEY (id_arquivo) REFERENCES API_BD3.ARQUIVO(id),
     data DATE, 
-    PK VARCHAR PRIMARY KEY,
+    coluna_pk VARCHAR,
     notdeletable VARCHAR
 );
 
