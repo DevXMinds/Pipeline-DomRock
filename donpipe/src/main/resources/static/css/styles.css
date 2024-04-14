@@ -25,16 +25,6 @@ header {
     background-color: #000;
 }
 
-.corner-dot {
-    position: absolute;
-    top: 75px;
-    left: 30px;
-    width: 100px;
-    height: 100px;
-    background-color: gray;
-    border-radius: 50%;
-}
-
 .menu-btn {
     position: absolute;
     right: 7%;
@@ -151,18 +141,7 @@ header {
     color: white;
 }
 
-.botao-selecionar-pk {
-    padding: 10px 20px;
-    margin: 10px;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 5px;
-    background-color: #12b809;
-    color: white;
-}
-
-.botao-coluna-nao-deletavel {
+.botao-enviar {
     padding: 10px 20px;
     margin: 10px;
     border: none;
