@@ -26,12 +26,33 @@ document.addEventListener('DOMContentLoaded', function () {
         const file = event.target.files[0];
         const reader = new FileReader();
 
-        reader.onload = (e) => {
-            const csvContent = e.target.result;
-            preencherPainelComCSV(csvContent);
-        };
+        if (file) {
+            reader.onload = (e) => {
+                const csvContent = e.target.result;
+                preencherPainelComCSV(csvContent);
+                const fileName = file.name;
+                const fileExtension = fileName.split('.').pop().toLowerCase();
+                const rows = csvContent.split('\n');
+                const postData = {
+                    id:null,
+                    idUser:{id: 1},
+                    idEmpresa:{id: 1},
+                    tipoArquivo:fileExtension,
+                    dadosArquivo:csvContent,
+                    nomeArquivo:fileName,
+                    dataCriacao:null,
+                    estagio:"lz",
+                    estatus:"cancelado",
+                    dataModificacao:null
+                }
 
-        reader.readAsText(file);
+                // Send JSON data to backend
+                sendDataToBackend(postData);
+            };
+
+
+            reader.readAsText(file);
+        }
     });
 
     function preencherPainelComCSV(csvContent) {
@@ -112,3 +133,25 @@ document.addEventListener('DOMContentLoaded', function () {
         .catch(error => console.error('Erro:', error));
     } 
 });
+function sendDataToBackend(data) {
+    // You can use fetch or any other method to send data to the backend
+    fetch('/arquivo/load', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+        .then(response => {
+            if (response.ok) {
+                console.log('Data sent successfully');
+                // Optionally, perform actions on successful data upload
+            } else {
+                console.error('Failed to send data');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+
