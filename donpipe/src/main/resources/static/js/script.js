@@ -7,6 +7,22 @@ document.addEventListener('DOMContentLoaded', function () {
     const dataTableBody = document.querySelector('#data-table tbody');
     let colunaSelecionada = -1; // Inicializado como -1 para indicar que nenhuma coluna está selecionada
 
+
+    function selecionarLinha(linha) {
+        var linhas = document.getElementById("minhaTabela").getElementsByTagName("tr");
+        for (var i = 0; i < linhas.length; i++) {
+            linhas[i].classList.remove("linha-selecionada");
+        }
+        linha.classList.add("linha-selecionada");
+    }
+
+    function showPopupInativo() {
+        var popup = document.querySelector(".popupNaoImplementada");
+        popup.style.display = "block";
+        setTimeout(function () {
+            popup.style.display = "none";
+        }, 2000);
+    }
     menuBtn.addEventListener('click', (event) => {
         event.stopPropagation();
         menuPanel.style.display = (menuPanel.style.display === 'none') ? 'block' : 'none';
@@ -19,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     document.getElementById('realizar-carga-btn').addEventListener('click', () => {
-        fileInput.click(); 
+        fileInput.click();
     });
 
     fileInput.addEventListener('change', (event) => {
@@ -95,20 +111,21 @@ document.addEventListener('DOMContentLoaded', function () {
         alert('Você fez logout!');
     });
 
+
     function converterCSV() {
         var fileInput = document.getElementById('csvFile');
         var file = fileInput.files[0];
         var formData = new FormData();
         formData.append('arquivo', file);
-    
+
         fetch('/load', {
             method: 'POST',
             body: formData
         })
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('jsonResult').innerText = JSON.stringify(data, null, 2);
-        })
-        .catch(error => console.error('Erro:', error));
-    } 
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('jsonResult').innerText = JSON.stringify(data, null, 2);
+            })
+            .catch(error => console.error('Erro:', error));
+    }
 });
