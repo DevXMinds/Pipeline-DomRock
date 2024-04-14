@@ -27,7 +27,7 @@
 |-----------------------|-------------------------|-------------------------|-------------------------|-------------------------|
 | Empresa | Que alterações e importações de arquivos tenham um registro  | poder ter controle sobre as alterações realizadas |🔥🔥| 1|
 | Cliente | Poder gerenciar as colunas utilizadas para o processo | para que não haja informações desnecessárias | 🌟 | 2 |
-| Cliente | Poder selecionar quais colunas não possam ser excluídas |  para assim nunca perder informações importantes para o processo |🔥🔥|3|
+| Cliente | Poder selecionar quais colunas não possam ser excluídas |  para assim nunca perder informações importantes para o processo | 🌟 |3|
 | Usuário | Poder realizar o carregamento dos meus arquivos |  para facilitação do processo |🌟|4|
 | Cliente | De visualizar para onde cada arquivo será enviado | Para facilitação de entendimento de qual documento estou pegando e onde estarei deixando o documento tratado |🌟|5|
 | Empresa | De adicionar permissões de usuários referentes a clientes, solução e estágio de configuração | Que a equipe possa utilizar o sistema e suas características de forma precisa |🌟|6|
@@ -35,7 +35,7 @@
 | Empresa | De ter uma visualização analítica completa sobre cada configuração | Acompanhamento em tempo real da configuração realizada | 🔥🔥|8|
 | Empresa | Ter a criação de um código referente ao arquivo (HASH) | Norteamento das configurações |💀💀💀| 9 |
 | Usuário | Poder tratar da forma correta o tipo de dado inserido | Utilização correta dos dados para análises posteriores | 🔥🔥 | 10 |
-| Usuário | Poder realizar a correção após a importação e tratamento do arquivo | Corrigir possíveis erros de importação | 🌟 | 11 |
+| Usuário | Poder realizar a correção após a importação e tratamento do arquivo | Corrigir possíveis erros de importação | 💀💀💀 | 11 |
 <span id="entrega">
 
 ## :white_check_mark: Entrega das Sprints
@@ -51,8 +51,8 @@
  Feira de Soluções no dia 27/06
 <span id="prototipo">
 
-## :computer: Protótipo
-- <a href= "" >   Wireframe do produto </a>
+## :computer: Backlog completo
+- <a target ="blank" href= "https://fatecspgov-my.sharepoint.com/:x:/r/personal/caio_sousa5_fatec_sp_gov_br/Documents/Book.xlsx?d=wab3883e82a0941008f213e85b64dd0d7&csf=1&web=1&e=Nqk00x" >   Requisitos do cliente </a>
 
 
 <span id="tecnologias">
