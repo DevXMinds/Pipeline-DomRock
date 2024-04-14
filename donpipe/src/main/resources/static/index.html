@@ -18,11 +18,10 @@
 
             <div id="menu-panel" class="menu-panel">
                 <ul>
-                    <li><a href="#" onclick="showPopupInativo()">Cargas</a></li>
-                    <li><a href="#" onclick="showPopupInativo()">Configurações</a></li>
-                    <li><a href="#" onclick="showPopupInativo()">Realizar Carga</a></li>
-                    <li><button id="logout-btn" class="logout-btn"
-                            onclick="showPopupInativo()">Log-out</button></li>
+                    <li><button>Cargas</button></li>
+                    <li><button>Configurações</button></li>
+                    <li><button>Realizar Carga</button></li>
+                    <li><button id="logout-btn" class="logout-btn">Log-out</button></li>
                 </ul>
             </div>
         </header>
@@ -31,24 +30,17 @@
             <button id="realizar-carga-btn" class="realizar-carga-btn">
                 <span class="material-icons">upload</span> Realizar Carga
             </button>
+            <div class="painel-botoes">
+                <button class="botao-enviar">Enviar</button>
+                <button class="botao-cancelar" id="fechar-painel">Cancelar</button>
+            </div>
         </footer>
 
         <div id="painel" class="painel">
             <table id="data-table" class="excel-table">
                 <tbody>
-                    
                 </tbody>
             </table>
-            <div class="painel-botoes">
-                <button class="botao-enviar">Enviar</button>
-                <button class="botao-cancelar" id="fechar-painel">Cancelar</button>
-            </div>
-        </div>
-
-        <!--popup de função não inserida -->
-        <div class="popupNaoImplementada">
-            <span class="material-icons">error</span>
-            <p>Função não implementada</p>
         </div>
 
         <input type="file" id="file-input" style="display: none;">

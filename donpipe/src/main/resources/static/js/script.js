@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const menuBtn = document.getElementById('menu-btn');
     const menuPanel = document.getElementById('menu-panel');
     const painel = document.getElementById('painel');
+    const menuPanelButtons = document.querySelectorAll('#menu-panel button');
     const logoutBtn = document.getElementById('logout-btn');
     const fileInput = document.getElementById('file-input');
     const dataTableBody = document.querySelector('#data-table tbody');
@@ -13,14 +14,6 @@ document.addEventListener('DOMContentLoaded', function () {
             linhas[i].classList.remove("linha-selecionada");
         }
         linha.classList.add("linha-selecionada");
-    }
-
-    function showPopupInativo() {
-        var popup = document.querySelector(".popupNaoImplementada");
-        popup.style.display = "block";
-        setTimeout(function () {
-            popup.style.display = "none";
-        }, 2000);
     }
 
     menuBtn.addEventListener('click', (event) => {
@@ -148,6 +141,13 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    function showPopupInativo() {
+        alert('Função não implementada');
+    }
+    menuPanelButtons.forEach(button => {
+        button.addEventListener('click', showPopupInativo);
+    });
+
     document.querySelector('.botao-selecionar-pk').addEventListener('click', () => {
         gerarJSONColunaSelecionada('PK');
     });
@@ -158,6 +158,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById('fechar-painel').addEventListener('click', () => {
         painel.style.display = 'none';
+        console.log = ("eae");
     });
 
     logoutBtn.addEventListener('click', () => {
