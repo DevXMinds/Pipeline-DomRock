@@ -1,8 +1,10 @@
 package com.devxminds.donpipe.resource;
 
 import com.devxminds.donpipe.dao.ArquivoDAO;
+import com.devxminds.donpipe.dao.LzDAO;
 import com.devxminds.donpipe.dto.ArquivoDto;
 import com.devxminds.donpipe.entidade.Arquivo;
+import com.devxminds.donpipe.entidade.Lz;
 import com.devxminds.donpipe.service.ArquivoService;
 import com.devxminds.donpipe.util.JPAUtil;
 import jakarta.persistence.EntityManager;
@@ -13,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 import static jakarta.persistence.Persistence.createEntityManagerFactory;
 
@@ -68,10 +71,18 @@ public class ArquivoController {
         String jsonGetResult = arquivoDoBanco.getNomeArquivo();
         em.getTransaction().commit();
         em.close();
-
-
         return jsonGetResult;
-
+    }
+    @GetMapping("/latestArquivo")
+    public Long getLatestArquivo(){
+        EntityManager em = JPAUtil.getEntityManager();
+        ArquivoDAO daoGet = new ArquivoDAO(em);
+        em.getTransaction().begin();
+        List<Arquivo> listArquivos = daoGet.buscarTodos();
+        Arquivo arquivoDoBanco = listArquivos.get(listArquivos.size()-1);
+        em.getTransaction().commit();
+        em.close();
+        return arquivoDoBanco.getId();
     }
 
 

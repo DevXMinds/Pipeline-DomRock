@@ -1,7 +1,10 @@
 package com.devxminds.donpipe.dao;
 
 import com.devxminds.donpipe.entidade.Arquivo;
+import com.devxminds.donpipe.entidade.Lz;
 import jakarta.persistence.EntityManager;
+
+import java.util.List;
 
 /**
  * Classe ArquivoDAO com a função de acionar os métodos existentes no EM
@@ -34,5 +37,8 @@ public class ArquivoDAO {
      */
     public Arquivo buscar(int id) {
         return this.em.find(Arquivo.class, id);
+    }
+    public List<Arquivo> buscarTodos() {
+        return this.em.createQuery("from Arquivo ", Arquivo.class).getResultList();
     }
 }

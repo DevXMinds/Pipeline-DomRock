@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/lz")
@@ -60,6 +61,17 @@ public class LzController {
 
         return jsonGetResult;
 
+    }
+    @GetMapping("/lastestLZ")
+    public int getLastestLz(){
+        EntityManager em = JPAUtil.getEntityManager();
+        LzDAO daoGet = new LzDAO(em);
+        em.getTransaction().begin();
+        List<Lz> allLZList = daoGet.buscarTodos();
+        Lz ultLZ = allLZList.get(allLZList.size()-1);
+        em.getTransaction().commit();
+        em.close();
+        return Math.toIntExact(ultLZ.getId());
     }
 
 }
