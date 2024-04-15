@@ -176,15 +176,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 const columnHeader = headers[index].textContent.trim();
                 return columnHeader.replace('vpn_key', '').trim();
             });
+            const notdeletableValue = colunasSelecionadasNomes.join(";");
             //console.log(colunasSelecionadasNomes,colunasSelecionadasNomespK);
-
             const postData =
             {
                 id: null,
                 idArquivo: {id:10},
                 data: null,
                 colunaPk: colunasSelecionadasNomespK[0],
-                notdeletable: colunasSelecionadasNomes
+                notdeletable: notdeletableValue
             }
             sendLZtoBackEnd(postData);
 
