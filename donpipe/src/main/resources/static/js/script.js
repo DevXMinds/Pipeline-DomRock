@@ -83,6 +83,10 @@ document.addEventListener('DOMContentLoaded', function () {
             icon.textContent = 'vpn_key'; // Set the icon text
             th.textContent = header;
             th.appendChild(button);
+            button.addEventListener('contextmenu', function(event) {
+                event.preventDefault();
+            });
+
             button.addEventListener('auxclick', () => {
 
                 selecionarPk(index,button);
@@ -178,10 +182,11 @@ document.addEventListener('DOMContentLoaded', function () {
             });
             const notdeletableValue = colunasSelecionadasNomes.join(";");
             //console.log(colunasSelecionadasNomes,colunasSelecionadasNomespK);
+
             const postData =
             {
                 id: null,
-                idArquivo: {id:10},
+                idArquivo: {id: null},
                 data: null,
                 colunaPk: colunasSelecionadasNomespK[0],
                 notdeletable: notdeletableValue
