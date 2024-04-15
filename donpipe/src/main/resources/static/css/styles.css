@@ -211,3 +211,20 @@ header {
 .excel-table th.selecionada {
     background-color: #ffd700; /* Amarelo para indicar seleção */
 }
+/* CSS Style for the header button */
+.header-button {
+    padding: 5px 10px; /* Adjust padding as needed */
+    background-color: #007bff; /* Button background color */
+    color: #fff; /* Text color */
+    border: none; /* Remove button border */
+    border-radius: 5px; /* Add some border radius for rounded corners */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: background-color 0.3s ease; /* Smooth transition for background color change */
+}
+.header-button.toggled {
+    background-color: #28a745; /* Change background color when toggled */
+}
+/* CSS Style for the icon inside the button */
+.header-button i.material-icons {
+    margin-right: 5px; /* Add some right margin to separate icon from text (adjust as needed) */
+}
