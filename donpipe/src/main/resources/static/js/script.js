@@ -87,8 +87,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 event.preventDefault();
             });
 
-            button.addEventListener('auxclick', () => {
-
+            button.addEventListener('click', () => {
+                event.stopPropagation();
                 selecionarPk(index,button);
 
 
