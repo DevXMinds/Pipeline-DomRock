@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
 
@@ -26,7 +27,8 @@ public class Lz {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_arquivo", nullable = false)
     private Arquivo idArquivo;
-
+    
+    @CreationTimestamp
     @Column(name = "data")
     private LocalDate data;
 

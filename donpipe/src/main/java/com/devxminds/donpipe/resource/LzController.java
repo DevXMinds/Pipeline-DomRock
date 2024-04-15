@@ -1,7 +1,9 @@
 package com.devxminds.donpipe.resource;
 
+import com.devxminds.donpipe.dao.ArquivoDAO;
 import com.devxminds.donpipe.dao.LzDAO;
 import com.devxminds.donpipe.dto.LzDto;
+import com.devxminds.donpipe.entidade.Arquivo;
 import com.devxminds.donpipe.entidade.Lz;
 import com.devxminds.donpipe.service.LzService;
 import com.devxminds.donpipe.util.JPAUtil;
@@ -11,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/lz")
@@ -32,7 +35,11 @@ public class LzController {
     public ResponseEntity<LzDto> register(@RequestBody LzDto lzDto) throws IOException {
         EntityManager em = JPAUtil.getEntityManager();
         LzDAO daoSave = new LzDAO(em);
+        ArquivoDAO daoGet = new ArquivoDAO(em);
+        List<Arquivo> listArquivos = daoGet.buscarTodos();
+        Arquivo arquivoDoBanco = listArquivos.get(listArquivos.size()-1);
         em.getTransaction().begin();
+        lzDto.idArquivo().setId(arquivoDoBanco.getId());
         daoSave.salvar(lzService.store(lzDto));
         em.getTransaction().commit();
         em.close();
@@ -60,6 +67,17 @@ public class LzController {
 
         return jsonGetResult;
 
+    }
+    @GetMapping("/lastestLZ")
+    public int getLastestLz(){
+        EntityManager em = JPAUtil.getEntityManager();
+        LzDAO daoGet = new LzDAO(em);
+        em.getTransaction().begin();
+        List<Lz> allLZList = daoGet.buscarTodos();
+        Lz ultLZ = allLZList.get(allLZList.size()-1);
+        em.getTransaction().commit();
+        em.close();
+        return Math.toIntExact(ultLZ.getId());
     }
 
 }

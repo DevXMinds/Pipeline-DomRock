@@ -2,10 +2,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const menuBtn = document.getElementById('menu-btn');
     const menuPanel = document.getElementById('menu-panel');
     const painel = document.getElementById('painel');
+    const menuPanelButtons = document.querySelectorAll('#menu-panel button');
     const logoutBtn = document.getElementById('logout-btn');
     const fileInput = document.getElementById('file-input');
     const dataTableBody = document.querySelector('#data-table tbody');
     let colunasSelecionadas = []; // Inicializado como uma lista vazia para armazenar múltiplas colunas selecionadas
+    let colunasSelecionadaspk = []; // Inicializado como uma lista vazia para armazenar múltiplas colunas selecionadas PK
 
     function selecionarLinha(linha) {
         var linhas = document.getElementById("minhaTabela").getElementsByTagName("tr");
@@ -13,14 +15,6 @@ document.addEventListener('DOMContentLoaded', function () {
             linhas[i].classList.remove("linha-selecionada");
         }
         linha.classList.add("linha-selecionada");
-    }
-
-    function showPopupInativo() {
-        var popup = document.querySelector(".popupNaoImplementada");
-        popup.style.display = "block";
-        setTimeout(function () {
-            popup.style.display = "none";
-        }, 2000);
     }
 
     menuBtn.addEventListener('click', (event) => {
@@ -81,14 +75,27 @@ document.addEventListener('DOMContentLoaded', function () {
         const headerRow = document.createElement('tr');
         headers.forEach((header, index) => {
             const th = document.createElement('th');
-            const icon = document.createElement('span');
-            icon.className = "material-icons";
-            icon.textContent = 'vpn_key';
-            icon.addEventListener('click', () => {
-                selecionarColuna(index);
-            });
+            const button = document.createElement('button');
+            const icon = document.createElement('i'); // Create an icon element
+            button.className = "header-button";
+            button.appendChild(icon);
+            icon.className = 'material-icons'; // Add a class for icon styling
+            icon.textContent = 'vpn_key'; // Set the icon text
             th.textContent = header;
-            th.appendChild(icon);
+            th.appendChild(button);
+            button.addEventListener('contextmenu', function(event) {
+                event.preventDefault();
+            });
+
+            button.addEventListener('click', () => {
+                event.stopPropagation();
+                selecionarPk(index,button);
+
+
+            });
+            th.addEventListener('click',()=>{
+                selecionarColunas(index)
+            })
             headerRow.appendChild(th);
         });
         dataTableBody.appendChild(headerRow);
@@ -96,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Adiciona dados às linhas da tabela
         for (let i = 1; i < linhas.length; i++) {
             const colunas = linhas[i].split(';');
-            if (colunas.length === numColunas) { 
+            if (colunas.length === numColunas) {
                 const tr = document.createElement('tr');
                 colunas.forEach(coluna => {
                     const td = document.createElement('td');
@@ -120,35 +127,107 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
+
 // Event listeners para seleção de colunas ao clicar nos cabeçalhos
     document.querySelectorAll('#data-table th').forEach((th, index) => {
         th.addEventListener('click', () => {
-            selecionarColuna(index);
+
+            selecionarColunas(index);
         });
     });
-// Função para selecionar uma coluna
-    function selecionarColuna(index) {
+
+
+    function selecionarPk(index, button) {
+        const columnIndex = colunasSelecionadaspk.indexOf(index);
+        if (columnIndex === -1) {
+
+            colunasSelecionadaspk = [];
+            // If the clicked column is not already selected, add it to the selected columns
+            colunasSelecionadaspk.push(index);
+        } else {
+            // If the clicked column is already selected, remove it from the selected columns
+            colunasSelecionadaspk = [];
+        }
+
+        // Remove the 'toggled' class from all buttons
+        document.querySelectorAll('.header-button').forEach(btn => {
+            btn.classList.remove('toggled');
+        });
+
+        // Add the 'toggled' class to the clicked button
+        button.classList.add('toggled');
+    }
+    function selecionarColunas(index) {
         const columnIndex = colunasSelecionadas.indexOf(index);
         if (columnIndex === -1) {
             colunasSelecionadas.push(index);
         } else {
-            colunasSelecionadas.splice(columnIndex, 1);
+            colunasSelecionadas.splice(columnIndex, 1)
         }
         highlightSelectedColumns();
     }
-   // Função para gerar JSON com as colunas selecionadas    TA ENVIANDO OS DADOS JSON PRO CONSOLE
+    // Função para gerar JSON com as colunas selecionadas    TA ENVIANDO OS DADOS JSON PRO CONSOLE
     function gerarJSONColunaSelecionada(tipo) {
         if (colunasSelecionadas.length > 0) {
             const headers = document.querySelectorAll('#data-table th');
-            const colunasSelecionadasNomes = colunasSelecionadas.map(index => headers[index].textContent);
-            const jsonData = JSON.stringify({ "colunasSelecionadas": colunasSelecionadasNomes });
-            console.log(jsonData);
+
+
+            const colunasSelecionadasNomespK = colunasSelecionadaspk.map(index =>{
+                const columnHeader = headers[index].textContent.trim();
+                return columnHeader.replace('vpn_key', '').trim();
+        });
+            const colunasSelecionadasNomes = colunasSelecionadas.map(index => {
+                const columnHeader = headers[index].textContent.trim();
+                return columnHeader.replace('vpn_key', '').trim();
+            });
+            const notdeletableValue = colunasSelecionadasNomes.join(";");
+            //console.log(colunasSelecionadasNomes,colunasSelecionadasNomespK);
+
+            const postData =
+            {
+                id: null,
+                idArquivo: {id: null},
+                data: null,
+                colunaPk: colunasSelecionadasNomespK[0],
+                notdeletable: notdeletableValue
+            }
+            sendLZtoBackEnd(postData);
+
+
         } else {
             alert('Por favor, selecione uma ou mais colunas antes de prosseguir.');
         }
     }
+    function sendLZtoBackEnd(data){
+        fetch('/lz/load', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Data sent successfully');
+                    // Optionally, perform actions on successful data upload
+                } else {
+                    console.error('Failed to send data');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
 
-    document.querySelector('.botao-selecionar-pk').addEventListener('click', () => {
+
+    function showPopupInativo() {
+        alert('Função não implementada');
+    }
+    menuPanelButtons.forEach(button => {
+        button.addEventListener('click', showPopupInativo);
+    });
+
+    document.querySelector('.botao-enviar').addEventListener('click', () => {
         gerarJSONColunaSelecionada('PK');
     });
 
@@ -158,6 +237,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById('fechar-painel').addEventListener('click', () => {
         painel.style.display = 'none';
+        console.log = ("eae");
     });
 
     logoutBtn.addEventListener('click', () => {

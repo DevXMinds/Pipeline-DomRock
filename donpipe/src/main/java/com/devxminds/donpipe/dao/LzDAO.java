@@ -3,6 +3,8 @@ package com.devxminds.donpipe.dao;
 import com.devxminds.donpipe.entidade.Lz;
 import jakarta.persistence.EntityManager;
 
+import java.util.List;
+
 /**
  * Classe LzDAO com a função de acionar os métodos existentes no EM
  * para Objetos Lz
@@ -36,5 +38,8 @@ public class LzDAO {
      */
     public Lz buscar(int id) {
         return this.em.find(Lz.class, id);
+    }
+    public List<Lz> buscarTodos() {
+        return this.em.createQuery("from Lz", Lz.class).getResultList();
     }
 }
