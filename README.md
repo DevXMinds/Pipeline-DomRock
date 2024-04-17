@@ -53,9 +53,9 @@
 ## Dados das Sprints
 <details>
 <summary>Sprint 1</summary>
-<a target ="blank" href= "https://docs.google.com/spreadsheets/d/e/2PACX-1vSM6BCTgLsiEkIcaPPwFA7ENN-F0SvOsCQlCgrkINPYRP-oSf1HKh0HOz3FWF3YEX5ghILJbrsd8_KX/pubhtml"> 
-Sprint 1 - Burndown </a>
-    <p></p>
+    
+![Sprint 1 - Burndown](https://github.com/DevXMinds/Pipeline-DomRock/blob/Readme-update/sprints/sprint1/blob/burndown-sprint1.png)
+
 <a target ="blank" href= " BOTA LINK AQUI EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE "> 
 Sprint 1 - Apresentação </a>
     
