@@ -50,11 +50,11 @@
 
  Feira de Soluções no dia 27/06
 <span id="prototipo">
-## Dados das Sprints
+## :game_die: Dados das Sprints
 <details>
-<summary>Sprint 1</summary>
+<summary>Sprint 1 :runner:</summary>
 
-### Sprint 1 - Burndown
+#### Sprint 1 - Burndown
 
 ![Sprint 1 - Burndown](https://github.com/DevXMinds/Pipeline-DomRock/blob/Readme-update/sprints/sprint1/blob/burndown-sprint1.png)
 
@@ -64,19 +64,19 @@ Sprint 1 - Apresentação </a>
 </details>
 
 <details>
-<summary>Sprint 2</summary>
+<summary>Sprint 2 :runner:</summary>
 Em andamento...
     
 </details>
 
 <details>
-<summary>Sprint 3</summary>
+<summary>Sprint 3 :runner:</summary>
 A fazer...
     
 </details>
 
 <details>
-<summary>Sprint 4</summary>
+<summary>Sprint 4 :runner:</summary>
 A fazer...
     
 </details>
