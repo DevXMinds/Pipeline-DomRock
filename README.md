@@ -53,8 +53,10 @@
 ## :game_die: Dados das Sprints
 <details>
 <summary>Sprint 1 :runner:</summary>
+    
+#### Burndown - Sprint 1
 
-![Sprint 1 - Burndown](https://github.com/DevXMinds/Pipeline-DomRock/blob/Readme-update/sprints/sprint1/blob/burndown-sprint1.png)
+![Sprint 1 - Burndown](https://github.com/DevXMinds/Pipeline-DomRock/blob/main/sprints/sprint1/blob/burndown-sprint1.png)
 
 <a target ="blank" href= "https://drive.google.com/file/d/1HfQbpNVyoc4-3_4Vi0-tXTyYNYvDHvmg/view?pli=1"> 
 Sprint 1 - Apresentação </a>
