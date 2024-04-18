@@ -12,10 +12,10 @@ import org.hibernate.annotations.ColumnDefault;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "\"user\"")
+@Table(name = "user", schema = "api_bd3")
 public class User {
     @Id
-    @ColumnDefault("nextval('api_bd3.user_id_seq'")
+    @ColumnDefault("nextval('api_bd3.user_id_seq')")
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -31,8 +31,5 @@ public class User {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_empresa", nullable = false)
     private Empresa idEmpresa;
-
-    @Column(name = "setor", nullable = false, length = 100)
-    private String setor;
 
 }

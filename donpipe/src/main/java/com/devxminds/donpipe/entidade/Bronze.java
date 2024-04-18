@@ -14,10 +14,10 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "bronze")
+@Table(name = "bronze", schema = "api_bd3")
 public class Bronze {
     @Id
-    @ColumnDefault("nextval('api_bd3.bronze_id_bronze_seq'")
+    @ColumnDefault("nextval('api_bd3.bronze_id_bronze_seq')")
     @Column(name = "id_bronze", nullable = false)
     private Long id;
 

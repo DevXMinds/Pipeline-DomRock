@@ -15,16 +15,14 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "lz")
+@Table(name = "lz", schema = "api_bd3")
 public class Lz {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "lz_id_gen")
-    @SequenceGenerator(name = "lz_id_gen", sequenceName = "lz_id_seq", allocationSize = 1)
-    @ColumnDefault("nextval('api_bd3.lz_id_seq1'")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_arquivo", nullable = false)
     private Arquivo idArquivo;
     

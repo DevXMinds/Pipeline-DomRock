@@ -26,19 +26,19 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "arquivo")
+@Table(name = "arquivo", schema = "api_bd3")
 public class Arquivo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ColumnDefault("nextval('api_bd3.arquivo_id_seq'")
+    @ColumnDefault("nextval('api_bd3.arquivo_id_seq')")
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_user", referencedColumnName = "id", nullable = false)
     private User idUser;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_empresa", referencedColumnName = "id", nullable = false)
     private Empresa idEmpresa;
 
