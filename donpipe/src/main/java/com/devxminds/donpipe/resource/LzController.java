@@ -1,14 +1,13 @@
 package com.devxminds.donpipe.resource;
 
-import com.devxminds.donpipe.dao.ArquivoDAO;
 import com.devxminds.donpipe.dao.LzDAO;
 import com.devxminds.donpipe.dto.LzDto;
-import com.devxminds.donpipe.entidade.Arquivo;
 import com.devxminds.donpipe.entidade.Lz;
 import com.devxminds.donpipe.service.LzService;
 import com.devxminds.donpipe.util.JPAUtil;
 import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,23 +26,15 @@ public class LzController {
      * Recebe uma String Serializada (JSON) via API Post, cria o Objeto Lz para tal Json e então persiste ele no BD.
      * <p>
      * 'EM' se refere a instância EM criada na classe JPAUtil a partir do EMF estático. Se refere ao persistence.xml
+     *
      * @param lzDto Objeto '@RequestBody' LzDTO transformado a partir do JSON recebido no Body da Requisição.
      * @return Retorna nada. Mas pode ser alterado para alguma mensagem devidamente estruturada. (Enviar String não funciona).
      * @throws IOException Tratamento da exceção de Body = null.
      */
     @PostMapping("/load")
-    public ResponseEntity<LzDto> register(@RequestBody LzDto lzDto) throws IOException {
-        EntityManager em = JPAUtil.getEntityManager();
-        LzDAO daoSave = new LzDAO(em);
-        ArquivoDAO daoGet = new ArquivoDAO(em);
-        List<Arquivo> listArquivos = daoGet.buscarTodos();
-        Arquivo arquivoDoBanco = listArquivos.get(listArquivos.size()-1);
-        em.getTransaction().begin();
-        lzDto.idArquivo().setId(arquivoDoBanco.getId());
-        daoSave.salvar(lzService.store(lzDto));
-        em.getTransaction().commit();
-        em.close();
-        return null;
+    public ResponseEntity<Lz> register(@RequestBody LzDto lzDto) throws IOException {
+        Lz lzCriado = lzService.store(lzDto);
+        return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(lzCriado);
     }
 
     /**

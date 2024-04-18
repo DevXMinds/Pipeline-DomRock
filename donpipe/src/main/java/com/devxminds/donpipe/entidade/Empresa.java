@@ -15,10 +15,10 @@ import org.hibernate.annotations.ColumnDefault;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "empresa")
+@Table(name = "empresa", schema = "api_bd3")
 public class Empresa {
     @Id
-    @ColumnDefault("nextval('api_bd3.empresa_id_seq'")
+    @ColumnDefault("nextval('api_bd3.empresa_id_seq')")
     @Column(name = "id", nullable = false)
     private Long id;
 

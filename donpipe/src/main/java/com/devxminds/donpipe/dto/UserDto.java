@@ -19,5 +19,4 @@ public class UserDto implements Serializable {
     String email;
     String senha;
     Empresa idEmpresa;
-    String setor;
 }
