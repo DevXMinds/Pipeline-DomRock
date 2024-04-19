@@ -1,6 +1,7 @@
 package com.devxminds.donpipe.dto;
 
-import lombok.Value;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.*;
 
 import java.io.Serializable;
 
@@ -11,7 +12,11 @@ import java.io.Serializable;
  *@author Caue
  *@version 1.0
  */
-@Value
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class EmpresaDto{
     Integer id;
     String nome;
