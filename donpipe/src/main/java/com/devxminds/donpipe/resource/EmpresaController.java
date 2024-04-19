@@ -1,14 +1,11 @@
 package com.devxminds.donpipe.resource;
 
 import com.devxminds.donpipe.dto.EmpresaDto;
-import com.devxminds.donpipe.entidade.Empresa;
 import com.devxminds.donpipe.service.EmpresaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/empresa")
@@ -24,5 +21,16 @@ public class EmpresaController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    /**
+     *
+     * @param empresaDto
+     * @return Retorna o body da empresa criada
+     */
+    @PostMapping("/criar")
+    public ResponseEntity<EmpresaDto> criarEmpresa(@RequestBody EmpresaDto empresaDto) {
+        EmpresaDto novaEmpresaDto = empresaService.criarEmpresa(empresaDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novaEmpresaDto);
     }
 }
