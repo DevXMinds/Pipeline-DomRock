@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -41,8 +42,13 @@ public class ArquivoService {
      * @param id id do Arquivo
      * @return Arquivo com o id inserido
      */
-    public Optional<Arquivo> findById(Long id) {
-        return arquivoRepository.findById(id);
+    public ArquivoDto findById(Long id) {
+        Optional<Arquivo> arquivo = arquivoRepository.findById(id);
+        if (arquivo.isPresent()) {
+            return modelMapper.map(arquivo.get(), ArquivoDto.class);
+        } else {
+            throw new NoSuchElementException("Arquivo não encontrado com o id:" +id);
+        }
     }
 
     /**

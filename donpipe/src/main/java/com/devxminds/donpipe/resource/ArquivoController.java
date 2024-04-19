@@ -49,10 +49,10 @@ public class ArquivoController {
      * @return String Json para ser consumida pelo front-end
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Arquivo> getArquivoById(@PathVariable Long id) {
-        Optional<Arquivo> arquivoOptional = arquivoService.findById(id);
-        if (arquivoOptional.isPresent()) {
-            return ResponseEntity.ok(arquivoOptional.get());
+    public ResponseEntity<ArquivoDto> findById(@PathVariable Long id) {
+        ArquivoDto arquivoDto = arquivoService.findById(id);
+        if (arquivoDto != null) {
+            return ResponseEntity.ok(arquivoDto);
         } else {
             return ResponseEntity.notFound().build();
         }
