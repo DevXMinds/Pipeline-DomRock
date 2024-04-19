@@ -21,11 +21,11 @@ public class Silver {
     @Column(name = "id_silver", nullable = false)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_user", nullable = false)
     private User idUser;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_arquivo", nullable = false)
     private Bronze idArquivo;
 

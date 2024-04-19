@@ -9,10 +9,10 @@ import java.io.Serializable;
  *<p>
  *DTO for {@link com.devxminds.donpipe.entidade.Empresa}
  *@author Caue
- *@version 0.1
+ *@version 1.0
  */
 @Value
-public class EmpresaDto implements Serializable {
+public class EmpresaDto{
     Integer id;
     String nome;
     String setor;

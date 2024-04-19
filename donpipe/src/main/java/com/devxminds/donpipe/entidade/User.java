@@ -28,8 +28,12 @@ public class User {
     @Column(name = "senha", nullable = false, length = 100)
     private String senha;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_empresa", nullable = false)
     private Empresa idEmpresa;
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "permissao", nullable = false)
+    private Permissao permissao;
 
 }
