@@ -18,7 +18,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class EmpresaDto{
-    Integer id;
+    Long id;
     String nome;
     String setor;
 }
