@@ -18,7 +18,7 @@ import lombok.*;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserDto{
-    Integer id;
+    Long id;
     String nomeUser;
     String email;
     String senha;
