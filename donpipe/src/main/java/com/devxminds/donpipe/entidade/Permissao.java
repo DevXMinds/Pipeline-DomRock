@@ -18,7 +18,7 @@ import lombok.Setter;
 public class Permissao {
     @Id
     @Column(name = "nome", nullable = false)
-    private Long nome;
+    private String nome;
 
     @Column(name = "descricao", nullable = false, length = 200)
     private String descricao;
