@@ -28,7 +28,7 @@ public class EmpresaController {
      * @param empresaDto
      * @return Retorna o body da empresa criada
      */
-    @PostMapping("/criar")
+    @PostMapping("/load")
     public ResponseEntity<EmpresaDto> criarEmpresa(@RequestBody EmpresaDto empresaDto) {
         EmpresaDto novaEmpresaDto = empresaService.criarEmpresa(empresaDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(novaEmpresaDto);
