@@ -17,7 +17,8 @@ import java.time.LocalDate;
 @Table(name = "silver", schema = "api_bd3")
 public class Silver {
     @Id
-    @ColumnDefault("nextval('api_bd3.silver_id_silver_seq')")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "silver_seq_generator")
+    @SequenceGenerator(name = "silver_seq_generator", sequenceName = "silver_id_seq", schema = "api_bd3", allocationSize = 1)
     @Column(name = "id_silver", nullable = false)
     private Long id;
 

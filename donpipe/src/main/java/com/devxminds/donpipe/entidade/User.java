@@ -15,7 +15,8 @@ import org.hibernate.annotations.ColumnDefault;
 @Table(name = "user", schema = "api_bd3")
 public class User {
     @Id
-    @ColumnDefault("nextval('api_bd3.user_id_seq')")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq_generator")
+    @SequenceGenerator(name = "user_seq_generator", sequenceName = "user_id_seq", schema = "api_bd3", allocationSize = 1)
     @Column(name = "id", nullable = false)
     private Long id;
 

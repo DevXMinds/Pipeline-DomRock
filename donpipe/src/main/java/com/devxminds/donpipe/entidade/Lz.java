@@ -18,7 +18,8 @@ import java.time.LocalDate;
 @Table(name = "lz", schema = "api_bd3")
 public class Lz {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "lz_seq_generator")
+    @SequenceGenerator(name = "lz_seq_generator", sequenceName = "lz_id_seq", schema = "api_bd3", allocationSize = 1)
     @Column(name = "id", nullable = false)
     private Long id;
 

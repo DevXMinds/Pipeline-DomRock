@@ -29,8 +29,8 @@ import java.util.Set;
 @Table(name = "arquivo", schema = "api_bd3")
 public class Arquivo {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ColumnDefault("nextval('api_bd3.arquivo_id_seq')")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "arquivo_seq_generator")
+    @SequenceGenerator(name = "arquivo_seq_generator", sequenceName = "arquivo_id_seq", schema = "api_bd3", allocationSize = 1)
     @Column(name = "id", nullable = false)
     private Long id;
 
