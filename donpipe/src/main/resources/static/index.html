@@ -1,10 +1,17 @@
+<!--
+    Este arquivo contém o código HTML para a página de login do sistema.
+    Ele inclui um formulário deslizante com opções para login e cadastro.
+    O formulário de login possui campos para email e senha, além de um botão de login.
+    O formulário de cadastro possui campos para nome completo, email, senha, empresa e um botão de cadastro.
+    O arquivo também inclui o logotipo da aplicação.
+-->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulário Deslizante | MF</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/donpipe/src/main/resources/static/css/login.css">
 </head>
 <body>
     <main>
@@ -27,21 +34,28 @@
                 <input type="password" id="lpassword" placeholder="********">
                 <button type="button">Login</button>
             </form>
+        
 
             <form action="" class="cadastro-form">
                 <h2>Cadastre-se</h2>
-                <label for="f-name">Primeiro Nome</label> 
-                <input type="text" id="f-name" placeholder="Primeiro Nome">
-                <label for="l-name">Último Nome</label>
-                <input type="text" id="l-name" placeholder="Último Nome">
+                <label for="f-name">Nome Completo</label> 
+                <input type="text" id="f-name" placeholder="Nome">
                 <label for="semail">Email</label>
-                <input type="email" id="semail" placeholder="pessoa@email.com">
+                <input type="text" id="email" placeholder="pessoa@email.com">
                 <label for="spassword">Senha</label>
-                <input type="password" id="spassword" placeholder="********">
+                <input type="password" id="spassword" placeholder="*********">
+                <label for="empresa">Empresa</label>
+                <select id="empresa">
+                    <option value="opcao1">Opção 1</option>
+                </select>
                 <button type="button">Cadastre-se</button>
             </form>
         </div>
+        
     </main>
-    <script src="script.js"></script>
+    <div id="logo">
+        <img width="40%" height="40%" src="/donpipe/src/main/resources/static/images/Don_Pipe.png" alt="logo">
+    </div>
+    <script src="/donpipe/src/main/resources/static/js/scriptLogin"></script>
 </body>
 </html>

@@ -1,61 +1,50 @@
-<!--
-    Este arquivo contém o código HTML para a página de login do sistema.
-    Ele inclui um formulário deslizante com opções para login e cadastro.
-    O formulário de login possui campos para email e senha, além de um botão de login.
-    O formulário de cadastro possui campos para nome completo, email, senha, empresa e um botão de cadastro.
-    O arquivo também inclui o logotipo da aplicação.
--->
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulário Deslizante | MF</title>
-    <link rel="stylesheet" href="/donpipe/src/main/resources/static/css/login.css">
-</head>
-<body>
-    <main>
-        <div class="cadastro">
-            <span>Ainda não é membro?</span> 
-            <button type="button">Cadastre-se</button>
-        </div>
-        
-        <div class="login">
-            <span>Já tem uma conta?</span> 
-            <button type="button">Login</button>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Realizar Carga</title>
+        <link rel="stylesheet" href="css/styles.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet" />
+
+    </head>
+    <body>
+        <header>
+            <div class="header-line"></div>
+            <button id="menu-btn" class="menu-btn">
+                <span class="material-icons">menu</span>
+            </button>
+
+            <div id="menu-panel" class="menu-panel">
+                <ul>
+                    <li><button>Cargas</button></li>
+                    <li><button>Configurações</button></li>
+                    <li><button>Realizar Carga</button></li>
+                    <li><button id="logout-btn" class="logout-btn">Log-out</button></li>
+                </ul>
+            </div>
+        </header>
+
+        <footer class="fixarRodape">
+            <button id="realizar-carga-btn" class="realizar-carga-btn">
+                <span class="material-icons">upload</span> Realizar Carga
+            </button>
+            <div class="painel-botoes">
+                <button class="botao-enviar">Enviar</button>
+                <button class="botao-cancelar" id="fechar-painel">Cancelar</button>
+            </div>
+        </footer>
+
+        <div id="painel" class="painel">
+            <table id="data-table" class="excel-table">
+                <tbody>
+
+                </tbody>
+            </table>
         </div>
 
-        <div class="back-layer">
-            <form action="" class="login-form active">
-                <h2>Login</h2>
-                <label for="lemail">Email</label>
-                <input type="email" id="lemail" placeholder="pessoa@email.com">
-                <label for="lpassword">Senha</label>
-                <input type="password" id="lpassword" placeholder="********">
-                <button type="button">Login</button>
-            </form>
-        
-
-            <form action="" class="cadastro-form">
-                <h2>Cadastre-se</h2>
-                <label for="f-name">Nome Completo</label> 
-                <input type="text" id="f-name" placeholder="Nome">
-                <label for="semail">Email</label>
-                <input type="text" id="email" placeholder="pessoa@email.com">
-                <label for="spassword">Senha</label>
-                <input type="password" id="spassword" placeholder="*********">
-                <label for="empresa">Empresa</label>
-                <select id="empresa">
-                    <option value="opcao1">Opção 1</option>
-                </select>
-                <button type="button">Cadastre-se</button>
-            </form>
-        </div>
-        
-    </main>
-    <div id="logo">
-        <img width="40%" height="40%" src="/donpipe/src/main/resources/static/images/Don_Pipe.png" alt="logo">
-    </div>
-    <script src="/donpipe/src/main/resources/static/js/scriptLogin"></script>
-</body>
+        <input type="file" id="file-input" style="display: none;">
+        <script src="js/script.js"></script>
+    </body>
 </html>
