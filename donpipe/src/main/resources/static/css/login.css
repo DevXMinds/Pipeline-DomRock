@@ -5,24 +5,25 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #00b1ec;
+    background-color: #1A3331;
     font-family: lato, sans-serif; 
+    overflow: hidden;
 }
 
 a {
     text-decoration: none;
     color: inherit;
 }
-
 main {
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
-    margin: 100px auto 0;
+    margin: 0 auto;
     max-width: 800px;
     overflow: hidden;
+    margin-top: 3%;
 }
-
+/*  NÃO MEXER  */
 main > * {
     grid-row: 1 / 2;
 }
@@ -36,7 +37,7 @@ main > * {
     padding: 40% 0;
     color: #fff;
     font-size: 23px;
-    background-color: rgb(255, 0, 64);
+    background-color: #ac1c02;
 }
 
 .login > button, .cadastro > button { 
@@ -87,7 +88,7 @@ form.active {
     transition: clip-path 0.3s;
 }
 
-input {
+input, select{
     display: block;
     height: 40px;
     width: 300px;
@@ -100,7 +101,7 @@ input {
 }
 
 input:focus {
-    border-color: rgb(255, 0, 64);
+    border-color: #ac1c02;
 }
 
 label {
@@ -111,7 +112,7 @@ button {
     background-color: transparent;
     border: 2px solid;
     border-radius: 15px;
-    color: rgb(255, 0, 64);
+    color: #ac1c02;
     width: 160px;
     height: 40px;
     text-transform: uppercase;
@@ -121,13 +122,14 @@ button {
 }
 
 form button:hover {
-    background-color: rgb(255, 0, 64);
+    background-color: #ac1c02;
     color: #fff;
 }
 
 #logo {
     position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 9999;
+    top: 10%;
+    left: 75%;
+    z-index: 999;
+    transform: rotate(15deg);
 }
