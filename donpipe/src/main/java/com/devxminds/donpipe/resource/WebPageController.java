@@ -3,10 +3,9 @@ package com.devxminds.donpipe.resource;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
-public class resources {
+public class WebPageController {
 
     @GetMapping("/")
     public ModelAndView login() {
