@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processar Arquivo CSV</title>
+</head>
+<body>
+<h2>Processar Arquivo CSV</h2>
+<form id="csvForm">
+    <label for="delimiter">Digite o delimitador (, ; |):</label>
+    <input type="text" id="delimiter" name="delimiter" required>
+    <br><br>
+    <label for="csvFile">Escolha um arquivo CSV:</label>
+    <input type="file" id="csvFile" name="csvFile" accept=".csv" required>
+    <br><br>
+    <button type="submit">Processar</button>
+</form>
+
+<div id="output"></div>
+
+<script>
+    document.getElementById('csvForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevenir o envio do formulário
+
+        // Limpar a saída anterior
+        document.getElementById('output').innerHTML = '';
+
+        // Obter o valor do delimitador e verificar se é válido
+        var delimiter = document.getElementById('delimiter').value;
+        if (delimiter !== ',' && delimiter !== ';' && delimiter !== '|') {
+            alert('Digite um delimitador válido (, ; |)');
+            return;
+        }
+
+        // Obter o arquivo CSV
+        var fileInput = document.getElementById('csvFile');
+        var file = fileInput.files[0];
+        if (!file) {
+            alert('Por favor, selecione um arquivo CSV.');
+            return;
+        }
+
+        // Ler o conteúdo do arquivo CSV
+        var reader = new FileReader();
+        reader.onload = function(event) {
+            var csvData = event.target.result;
+
+            // Separar as linhas do CSV
+            var lines = csvData.split('\n');
+
+            // Separar as colunas usando o delimitador especificado
+            var columns = lines.map(function(line) {
+                // Verificar se o delimitador é uma vírgula e removê-la, se necessário
+                if (delimiter === ',') {
+                    line = line.replace(/,/g, '');
+                }
+                return line.split(delimiter);
+            });
+
+            // Exibir as colunas na página HTML
+            var output = document.getElementById('output');
+            columns.forEach(function(row) {
+                var rowDiv = document.createElement('div');
+                row.forEach(function(column) {
+                    var columnSpan = document.createElement('span');
+                    columnSpan.textContent = column;
+                    rowDiv.appendChild(columnSpan);
+                });
+                output.appendChild(rowDiv);
+            });
+        };
+
+        reader.readAsText(file);
+    });
+</script>
+</body>
+</html>
