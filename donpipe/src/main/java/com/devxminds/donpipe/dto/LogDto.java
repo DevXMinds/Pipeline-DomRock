@@ -20,5 +20,4 @@ public class LogDto {
     User idUser;
     LocalDate logDate;
     Arquivo idArquivo;
-
 }

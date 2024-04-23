@@ -30,6 +30,8 @@ public class ArquivoController {
     private ArquivoService arquivoService;
     @Autowired
     private LogService logService;
+    @Autowired
+    private ModelMapper modelMapper;
 
     /**
      * Mapeamento do método HTTP "Post", quando chamado pelo caminho "endereço/load".
@@ -44,8 +46,7 @@ public class ArquivoController {
     @PostMapping("/load")
     public ResponseEntity<Arquivo> register(@RequestBody ArquivoDto arquivoDto) {
         Arquivo arquivoCriado = arquivoService.store(arquivoDto);
-        LogDto logDto = new LogDto(null,arquivoCriado.getIdUser(),null,arquivoService.getMostRecentArquivo().get());
-        logService.saveLog(logDto);
+        logService.saveLog(new LogDto(null,arquivoCriado.getIdUser(),null,arquivoService.getMostRecentArquivo().get()));
         return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(arquivoCriado);
     }
 
@@ -60,6 +61,7 @@ public class ArquivoController {
     @GetMapping("/{id}")
     public ResponseEntity<ArquivoDto> findById(@PathVariable Long id) {
         ArquivoDto arquivoDto = arquivoService.findById(id);
+        logService.saveLog(new LogDto(null,arquivoDto.getIdUser(),null, modelMapper.map(arquivoDto, Arquivo.class)));
         if (arquivoDto != null) {
             return ResponseEntity.ok(arquivoDto);
         } else {
@@ -75,6 +77,7 @@ public class ArquivoController {
     public ResponseEntity<Arquivo> getLatestArquivo(){
         Optional<Arquivo> arquivoOptional = arquivoService.getMostRecentArquivo();
         if (arquivoOptional.isPresent()) {
+            logService.saveLog(new LogDto(null,arquivoOptional.get().getIdUser(),null, modelMapper.map(arquivoOptional.get(), Arquivo.class)));
             return ResponseEntity.ok(arquivoOptional.get());
         } else {
             return ResponseEntity.notFound().build();

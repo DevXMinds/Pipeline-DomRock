@@ -17,10 +17,10 @@ public class LogService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public LogDto saveLog(LogDto logDto) {
+    public Log saveLog(LogDto logDto) {
         Log log = modelMapper.map(logDto, Log.class);
         log = logRepository.save(log);
-        return modelMapper.map(log, LogDto.class);
+        return log;
     }
 
     public LogDto getLog(Long id) {
