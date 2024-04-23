@@ -1,8 +1,13 @@
 package com.devxminds.donpipe.resource;
 
 import com.devxminds.donpipe.dto.ArquivoDto;
+import com.devxminds.donpipe.dto.LogDto;
 import com.devxminds.donpipe.entidade.Arquivo;
+import com.devxminds.donpipe.entidade.Log;
+import com.devxminds.donpipe.repositorios.LogRepository;
 import com.devxminds.donpipe.service.ArquivoService;
+import com.devxminds.donpipe.service.LogService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +28,8 @@ import java.util.Optional;
 public class ArquivoController {
     @Autowired
     private ArquivoService arquivoService;
+    @Autowired
+    private LogService logService;
 
     /**
      * Mapeamento do método HTTP "Post", quando chamado pelo caminho "endereço/load".
@@ -37,6 +44,8 @@ public class ArquivoController {
     @PostMapping("/load")
     public ResponseEntity<Arquivo> register(@RequestBody ArquivoDto arquivoDto) {
         Arquivo arquivoCriado = arquivoService.store(arquivoDto);
+        LogDto logDto = new LogDto(null,arquivoCriado.getIdUser(),null,arquivoService.getMostRecentArquivo().get());
+        logService.saveLog(logDto);
         return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(arquivoCriado);
     }
 
