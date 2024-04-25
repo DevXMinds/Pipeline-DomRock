@@ -28,6 +28,9 @@ public class ArquivoDto {
     private Long id;
     private User idUser;
     private Empresa idEmpresa;
+    private String nomeUpload;
+    private boolean header;
+    private String delimiter;
     private String tipoArquivo;
     private String dadosArquivo;
     private String nomeArquivo;
