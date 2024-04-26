@@ -26,4 +26,6 @@ public interface ArquivoRepository extends JpaRepository<Arquivo, Long> {
      *
      */
     Optional<Arquivo> findTopByOrderByIdDesc();
+
+    Optional<Arquivo> findAllByEstagio(String estagio);
 }

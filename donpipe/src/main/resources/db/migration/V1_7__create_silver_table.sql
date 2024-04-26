@@ -1,14 +1,12 @@
 CREATE TABLE IF NOT EXISTS API_BD3.SILVER
 (
+    id_silver        SERIAL PRIMARY KEY,
     id_user          INT NOT NULL,
     FOREIGN KEY (id_user) REFERENCES API_BD3.USER (id),
     id_arquivo       INT NOT NULL,
     FOREIGN KEY (id_arquivo) REFERENCES API_BD3.BRONZE (id_bronze),
     tipagem          VARCHAR,
-    id_silver        SERIAL PRIMARY KEY,
     data_modificacao DATE,
-    PK               VARCHAR,
-    notdeletable     VARCHAR,
     yaml             TEXT,
     hash_            VARCHAR
 );
