@@ -3,12 +3,6 @@ document.getElementById('csvForm').addEventListener('submit', function (event) {
 
     document.getElementById('output').innerHTML = '';
 
-    var delimiter = document.getElementById('delimiter').value;
-    if (delimiter !== ',' && delimiter !== ';' && delimiter !== '|') {
-        alert('Digite um delimitador válido (, ; |)');
-        return;
-    }
-
     var fileInput = document.getElementById('csvFile');
     var file = fileInput.files[0];
     if (!file) {
@@ -20,20 +14,40 @@ document.getElementById('csvForm').addEventListener('submit', function (event) {
     reader.onload = function (event) {
         var csvData = event.target.result;
 
-        var lines = csvData.split('\n');
+        var delimiter = detectDelimiter(csvData);
+        if (!delimiter) {
+            alert('Não foi possível detectar o delimitador padrão do CSV.');
+            return;
+        }
 
-        var columns = lines.map(function (line) {
-            return line.split(',');
-        });
+        var userDelimiter = document.getElementById('delimiter').value;
+
+        var modifiedCsvData = csvData.replace(new RegExp(escapeRegExp(delimiter), 'g'), userDelimiter);
+
+        var lines = modifiedCsvData.split('\n');
 
         var output = document.getElementById('output');
-        columns.forEach(function (row) {
-            var newRow = row.join(delimiter); //
+        lines.forEach(function (line) {
             var rowDiv = document.createElement('div');
-            rowDiv.textContent = newRow;
+            rowDiv.textContent = line;
             output.appendChild(rowDiv);
         });
     };
 
     reader.readAsText(file);
 });
+
+function detectDelimiter(csvData) {
+    var delimiters = [',', ';', '|'];
+    for (var i = 0; i < delimiters.length; i++) {
+        if (csvData.indexOf(delimiters[i]) !== -1) {
+            return delimiters[i];
+        }
+    }
+    return null;
+}
+
+
+function escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
