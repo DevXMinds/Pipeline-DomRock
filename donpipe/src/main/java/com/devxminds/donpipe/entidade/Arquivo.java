@@ -42,6 +42,15 @@ public class Arquivo {
     @JoinColumn(name = "id_empresa", referencedColumnName = "id", nullable = false)
     private Empresa idEmpresa;
 
+    @Column(name = "nome_upload", nullable = false)
+    private String nomeUpload;
+
+    @Column(name = "header", nullable = false)
+    private boolean header;
+
+    @Column(name = "delimiter", nullable = false)
+    private String delimiter;
+
     @Column(name = "tipo_arquivo", nullable = false, length = Integer.MAX_VALUE)
     private String tipoArquivo;
 

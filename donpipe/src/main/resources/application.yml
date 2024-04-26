@@ -19,6 +19,10 @@ spring:
     enabled: true
     default-schema: api_bd3
     baseline-on-migrate: true
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
 server:
   port: 8080
 # Debug true se for debugar
