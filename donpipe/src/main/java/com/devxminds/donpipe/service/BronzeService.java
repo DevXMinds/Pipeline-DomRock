@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -45,6 +47,10 @@ public class BronzeService {
         return bronze;
     }
 
+    public Optional<Bronze> getMostRecentBronze() {
+        return bronzeRepository.findTopByOrderByIdDesc();
+    }
+
     public BronzeDto findById(long id){
         Optional<Bronze> bronze = bronzeRepository.findById(id);
         if(bronze.isPresent()){
@@ -52,5 +58,14 @@ public class BronzeService {
         } else {
             throw new NoSuchElementException("Bronze não encontrado com o id:" +id);
         }
+    }
+
+    public List<BronzeDto> getAll() {
+        List<Bronze> bronze = bronzeRepository.findAll();
+        List<BronzeDto> bronzeDtos = new ArrayList<>();
+        for(Bronze b : bronze){
+            bronzeDtos.add(modelMapper.map(b, BronzeDto.class));
+        }
+        return bronzeDtos;
     }
 }
