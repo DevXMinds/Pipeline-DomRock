@@ -38,6 +38,19 @@ public class ArquivoService {
     }
 
     /**
+     * Seleciona o arquivo antigo e o substitui pelo novo com o delimitador solicitado
+     *
+     * @param file objeto ArquivoDTO, desserialização do JSON recebido.
+     * @return retorna o novo objeto Arquivo com o delimitador atualizado
+     */
+    public Arquivo update(ArquivoDto file) {
+        Optional<Arquivo> arquivo = arquivoRepository.findById(file.getId());
+        arquivoRepository.delete(arquivo.get());
+        arquivoRepository.save(modelMapper.map(file, Arquivo.class));
+        return arquivo.get();
+    }
+
+    /**
      * Busca um arquivo no repositório.
      * @param id id do Arquivo
      * @return Arquivo com o id inserido

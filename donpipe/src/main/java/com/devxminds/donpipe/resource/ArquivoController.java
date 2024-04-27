@@ -51,6 +51,21 @@ public class ArquivoController {
     }
 
     /**
+     * Mapeamento do método HTTP "Get", quando chamado pelo caminho "/update".
+     * <p>
+     * Ele atualiza o arquivo com o delimitador fornecido no objeto ArquivoDto recebido no corpo da requisição.
+     *
+     * @param arquivoDto Objeto '@RequestBody' ArquivoDTO transformado a partir do JSON recebido no Body da Requisição.
+     * @return Um ResponseEntity contendo o status da operação e o arquivo atualizado, se a operação for bem-sucedida.
+     */
+    @PostMapping("/update")
+    public ResponseEntity<Arquivo> update(@RequestBody ArquivoDto arquivoDto){
+        Arquivo arquivoAtualizado = arquivoService.update(arquivoDto);
+        logService.saveLog(new LogDto(null, arquivoAtualizado.getIdUser(), null,arquivoService.getMostRecentArquivo().get()));
+        return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(arquivoAtualizado);
+    }
+
+    /**
      * Mapeamento do método HTTP "Get", quando chamado pelo caminho "endereco/".
      * <p>
      * Envia um JSON do objeto Arquivo encontrado pelo seu ID.
