@@ -51,6 +51,15 @@ public class ArquivoService {
         }
     }
 
+    public ArquivoDto getByEstagio(String estagio) {
+        Optional<Arquivo> arquivo = arquivoRepository.findAllByEstagio(estagio);
+        if (arquivo.isPresent()) {
+            return modelMapper.map(arquivo.get(), ArquivoDto.class);
+        } else {
+            throw new NoSuchElementException("Arquivos não encontrados com o Estágio:" +estagio);
+        }
+    }
+
     /**
      * Busca o arquivo mais recente no repositório.
      * @return Arquivo com o id mais recente
