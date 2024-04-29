@@ -6,8 +6,8 @@ CREATE TABLE IF NOT EXISTS API_BD3.USER
     senha      VARCHAR(100) NOT NULL,
     id_empresa INT          NOT NULL,
     FOREIGN KEY (id_empresa) REFERENCES API_BD3.EMPRESA (id),
-    permissao VARCHAR(20) NOT NULL,
-    FOREIGN KEY (permissao) REFERENCES API_BD3.PERMISSAO (nome)
+    permissao  INT          NOT NULL,
+    FOREIGN KEY (permissao) REFERENCES API_BD3.PERMISSAO (id)
 );
 
 -- Encripta a coluna senha usando pgcrypto
