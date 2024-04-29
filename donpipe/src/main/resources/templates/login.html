@@ -6,7 +6,7 @@
     O arquivo também inclui o logotipo da aplicação.
 -->
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,13 +26,22 @@
         </div>
 
         <div class="back-layer">
-            <form action="" class="login-form active">
+            <form action="" th:object="${user}" th:action="@{/user/auth}" class="login-form active">
+                <script th:inline="javascript">
+                    /*<![CDATA[*/
+                    // Check if the URL contains "redirect:/login"
+                    if (window.location.href.includes("redirect:/home")) {
+                        // Redirect the user to the login page
+                        window.location.href = "/home";
+                    }
+                    /*]]>*/
+                </script>
                 <h2>Login</h2>
                 <label for="lemail">Email</label>
-                <input type="email" id="lemail" placeholder="pessoa@email.com">
+                <input th:field="*{email}" type="email" id="lemail" placeholder="pessoa@email.com">
                 <label for="lpassword">Senha</label>
-                <input type="password" id="lpassword" placeholder="********">
-                <button type="button">Login</button>
+                <input th:field="*{senha}" type="password" id="lpassword" placeholder="********">
+                <button type="submit">Login</button>
             </form>
         
 
@@ -57,5 +66,14 @@
         <img width="40%" height="40%" src="/images/Don_Pipe.png" alt="logo">
     </div>
     <script src="/js/scriptLogin"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        // Check if the URL contains "redirect:/login"
+        if (window.location.href.includes("redirect:/home")) {
+            // Redirect the user to the login page
+            window.location.href = "/home";
+        }
+        /*]]>*/
+    </script>
 </body>
 </html>

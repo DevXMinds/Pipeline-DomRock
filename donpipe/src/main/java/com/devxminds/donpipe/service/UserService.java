@@ -7,6 +7,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -31,5 +33,22 @@ public class UserService {
             throw new NoSuchElementException("Usuário não encontrado com i id: " + id);
         }
 
+    }
+
+    public List<UserDto> findAllUsers() {
+        List<User> users = userRepository.findAll();
+        List<UserDto> userDtos = new ArrayList<>();
+        for (User user : users) {
+            userDtos.add(modelMapper.map(user, UserDto.class));
+        }
+        return userDtos;
+    }
+    public UserDto getUserByEmail(String email) {
+        Optional<User> user = userRepository.findByEmail(email);
+        if (user.isPresent()) {
+            return modelMapper.map(user.get(), UserDto.class);
+        } else {
+            throw new NoSuchElementException("Nenhum usuário cadastrado com o email: " + email);
+        }
     }
 }
