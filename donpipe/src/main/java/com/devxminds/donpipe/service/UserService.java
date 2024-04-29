@@ -1,11 +1,14 @@
 package com.devxminds.donpipe.service;
 
 import com.devxminds.donpipe.dto.UserDto;
+import com.devxminds.donpipe.entidade.Permissao;
 import com.devxminds.donpipe.entidade.User;
+import com.devxminds.donpipe.repositorios.PermissaoRepository;
 import com.devxminds.donpipe.repositorios.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -14,6 +17,8 @@ import java.util.Optional;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PermissaoRepository permissaoRepository;
     @Autowired
     private ModelMapper modelMapper;
 
@@ -30,6 +35,14 @@ public class UserService {
         } else {
             throw new NoSuchElementException("Usuário não encontrado com i id: " + id);
         }
+    }
 
+    @Transactional
+    public Optional<User> changePermission(Long userId, Long permission) {
+        Optional<User> user = userRepository.findById(userId);
+        Permissao permissao = permissaoRepository.findById(permission).get();
+        user.get().setPermissao(permissao);
+        userRepository.save(user.get());
+        return user;
     }
 }
