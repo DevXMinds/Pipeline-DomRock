@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>testando</title>
+    <link rel="stylesheet" href="teste.css">
+</head>
+  
+<body>
+    <button id="open-popup-btn">Realizar Carga</button>
+    
+    <div id="popup-container" class="popup-container">
+        <div class="popup-content centralizado button_css">
+            <button id="close-popup-btn" style="color: blue; font-size: 32px;">&times;</button> <!-- Botão de fechar (X) -->
+            <br>
+            <form id="csvForm">
+                <p class="p-left">Nome do upload: <input style="width: 120px;" id="nomeUpload"><br></p> 
+                
+                    Selecione o arquivo CSV 
+                <input type="file" id="csvFile" accept=".csv" required>
+                <span id="file-size" style="font-size: 18px;"></span>
+                <br><br>
+                <label for="delimiter" class="delimiter-label" >Digite o delimitador (, ; |):  <input type="text" id="delimiter" style="width: 80px; text-align: left;" required></label>
+                <br>
+                <div class="checkbox-options">
+                    <p class="p-left">Este arquivo possui Header?</p>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="header" name="header" checked>
+                        <label for="header"> Sim</label>
+                    </div>
+                </div>
+                <br>
+                <button type="submit" class="button_css" id="send-btn">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="output"></div>
+
+    <script src="teste.js" defer></script>
+</body>
+</html>
