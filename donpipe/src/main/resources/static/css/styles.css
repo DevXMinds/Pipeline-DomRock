@@ -8,6 +8,14 @@ body {
     font-family: Arial, sans-serif;
 }
 
+.centered-images {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999; /* Garante que as imagens apareçam por cima de outros elementos */
+}
+
 header {
     position: relative;
     color: #000;
