@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Realizar Carga</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/pre_upload.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
@@ -21,7 +22,7 @@
     </header>
 
     <footer class="fixarRodape">
-        <button id="realizar-carga-btn" class="realizar-carga-btn">
+        <button id="open-popup-btn" class="realizar-carga-btn">
             <span class="material-icons">upload</span> Realizar Carga
         </button>
     </footer>
@@ -38,6 +39,39 @@
     <img src="img/blueball.png" alt="Blue Ball" class="centered-images" id="blueball-img">
     <img src="img/erro-404.png" alt="Erro 404" class="centered-images" id="erro-404-img">
 
-    <script src="js/script.js"></script>
+    <div id="popup-container" class="popup-container">
+        <div class="popup-content centralizado button_css">
+            <button id="close-popup-btn" style="color: blue; font-size: 32px;">&times;</button>
+            <br>
+            <form id="csvForm">
+                <p class="p-left">Nome do upload: <input style="width: 120px;" id="nomeUpload"><br></p> 
+                Selecione o arquivo CSV 
+                <input type="file" id="csvFile" accept=".csv" required>
+                <span id="file-size" style="font-size: 18px;"></span>
+                <br><br>
+                <label for="delimiter" class="delimiter-label">Escolha o delimitador:
+                    <select id="delimiter" style="width: 60px;">
+                        <option value=",">,</option>
+                        <option value=";">;</option>
+                        <option value="|">|</option>
+                    </select>   
+                </label>
+                <br>
+                <div class="checkbox-options">
+                    <p class="p-left">Este arquivo possui Header?</p>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="header" name="header" checked>
+                        <label for="header"> Sim</label>
+                    </div>
+                </div>
+                <br>
+                <button type="submit" class="button_css" id="send-btn">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="output"></div>
+
+    <script src="js/script.js" defer></script>
 </body>
 </html>
