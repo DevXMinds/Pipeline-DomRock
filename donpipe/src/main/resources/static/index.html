@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Realizar Carga</title>
+        <link rel="stylesheet" href="css/styles.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet" />
+
+    </head>
+    <body>
+        <header>
+            <div class="header-line"></div>
+            <button id="menu-btn" class="menu-btn">
+                <span class="material-icons">menu</span>
+            </button>
+
+            <div id="menu-panel" class="menu-panel">
+                <ul>
+                    <li><button>Cargas</button></li>
+                    <li><button>Configurações</button></li>
+                    <li><button>Realizar Carga</button></li>
+                    <li><button id="logout-btn" class="logout-btn">Log-out</button></li>
+                </ul>
+            </div>
+        </header>
+
+        <footer class="fixarRodape">
+            <button id="realizar-carga-btn" class="realizar-carga-btn">
+                <span class="material-icons">upload</span> Realizar Carga
+            </button>
+            <div class="painel-botoes">
+                <button class="botao-enviar">Enviar</button>
+                <button class="botao-cancelar" id="fechar-painel">Cancelar</button>
+            </div>
+        </footer>
+
+        <div id="painel" class="painel">
+            <table id="data-table" class="excel-table">
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+
+        <input type="file" id="file-input" style="display: none;">
+        <script src="js/script.js"></script>
+    </body>
+</html>

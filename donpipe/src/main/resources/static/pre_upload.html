@@ -3,25 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>testando</title>
-    <link rel="stylesheet" href="teste.css">
+    <title>Pré-Upload</title>
+    <link rel="stylesheet" href="css/pre_upload.css">
 </head>
-  
 <body>
     <button id="open-popup-btn">Realizar Carga</button>
-    
     <div id="popup-container" class="popup-container">
         <div class="popup-content centralizado button_css">
-            <button id="close-popup-btn" style="color: blue; font-size: 32px;">&times;</button> <!-- Botão de fechar (X) -->
+            <button id="close-popup-btn" style="color: blue; font-size: 32px;">&times;</button>
             <br>
             <form id="csvForm">
                 <p class="p-left">Nome do upload: <input style="width: 120px;" id="nomeUpload"><br></p> 
-                
-                    Selecione o arquivo CSV 
+                Selecione o arquivo CSV 
                 <input type="file" id="csvFile" accept=".csv" required>
                 <span id="file-size" style="font-size: 18px;"></span>
                 <br><br>
-                <label for="delimiter" class="delimiter-label" >Digite o delimitador (, ; |):  <input type="text" id="delimiter" style="width: 80px; text-align: left;" required></label>
+                <label for="delimiter" class="delimiter-label">Escolha o delimitador:
+                    <select id="delimiter" style="width: 60px;">
+                        <option value=",">,</option>
+                        <option value=";">;</option>
+                        <option value="|">|</option>
+                    </select>   
+                </label>
                 <br>
                 <div class="checkbox-options">
                     <p class="p-left">Este arquivo possui Header?</p>
@@ -35,9 +38,7 @@
             </form>
         </div>
     </div>
-
     <div id="output"></div>
-
-    <script src="teste.js" defer></script>
+    <script src="js/pre_upload.js" defer></script>
 </body>
 </html>

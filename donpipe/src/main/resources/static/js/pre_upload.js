@@ -6,6 +6,16 @@ document.getElementById('close-popup-btn').addEventListener('click', function() 
     document.getElementById('popup-container').style.display = 'none';
 });
 
+document.getElementById('send-btn').addEventListener('click', function() {
+    var nomeUploadValue = document.getElementById('nomeUpload').value; // Variável para o nome do upload
+    var checkboxValue = document.getElementById('header').checked; // Variável para o valor do checkbox
+    var delimiterValue = document.getElementById('delimiter').value; // Variável para o valor do delimitador selecionado
+
+    console.log(nomeUploadValue); // Você pode substituir console.log pelas ações que deseja realizar com os valores
+    console.log(checkboxValue);
+    console.log(delimiterValue);
+});
+
 document.getElementById('csvForm').addEventListener('submit', function (event) {
     event.preventDefault();
 
@@ -20,10 +30,6 @@ document.getElementById('csvForm').addEventListener('submit', function (event) {
 
     var nomeUpload = document.getElementById('nomeUpload').value;
 
-    
-
-
-
     var reader = new FileReader();
     reader.onload = function (event) {
         var csvData = event.target.result;
@@ -37,8 +43,6 @@ document.getElementById('csvForm').addEventListener('submit', function (event) {
         var userDelimiter = document.getElementById('delimiter').value;
 
         var modifiedCsvData = csvData.replace(new RegExp(escapeRegExp(delimiter), 'g'), userDelimiter);
-
-        
 
         var lines = modifiedCsvData.split('\n');
 
@@ -74,15 +78,6 @@ function removeHeader(csvData) {
 function escapeRegExp(string) {
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
-    
-
-
-
-
-
-
-
-
 
 document.getElementById('csvFile').addEventListener('change', function(event) {
     const fileInput = event.target;
