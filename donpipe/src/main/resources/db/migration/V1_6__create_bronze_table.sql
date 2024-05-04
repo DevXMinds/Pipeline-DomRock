@@ -1,10 +1,10 @@
 CREATE TABLE IF NOT EXISTS API_BD3.BRONZE
 (
+    id_bronze        SERIAL PRIMARY KEY,
     id_user          INT NOT NULL,
     FOREIGN KEY (id_user) REFERENCES API_BD3.USER (id),
     id_arquivo       INT NOT NULL,
     FOREIGN KEY (id_arquivo) REFERENCES API_BD3.ARQUIVO (id),
-    id_bronze        SERIAL PRIMARY KEY,
     data_modificacao DATE,
     PK               VARCHAR,
     naodeletavel     VARCHAR,

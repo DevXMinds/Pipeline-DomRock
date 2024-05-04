@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
 import java.util.List;
 
 @RestController
@@ -35,5 +36,14 @@ public class UserController {
         UserDto newUser = userService.newUser(userDto);
         return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(newUser);
     }
-
+  
+    @PostMapping("/changePermission")
+    public ResponseEntity<UserDto> changePermission(@RequestBody UserDto userDto, Long permissionId) {
+        Optional<User> userEncontrado = userService.changePermission(userDto.getId(), permissionId);
+        if(userEncontrado.isPresent()) {
+            return ResponseEntity.ok(userDto);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

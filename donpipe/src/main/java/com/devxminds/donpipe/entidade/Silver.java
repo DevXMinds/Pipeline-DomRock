@@ -36,12 +36,6 @@ public class Silver {
     @Column(name = "data_modificacao")
     private LocalDate dataModificacao;
 
-    @Column(name = "pk", length = Integer.MAX_VALUE)
-    private String pk;
-
-    @Column(name = "notdeletable", length = Integer.MAX_VALUE)
-    private String notdeletable;
-
     @Column(name = "yaml", length = Integer.MAX_VALUE)
     private String yaml;
 
