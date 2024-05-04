@@ -14,7 +14,7 @@ body {
 }
 
 .navbar {
-    background-image: url('../img/img.png');
+    background-image: url('../images/img.png');
     background-repeat: no-repeat;
     background-position: right 250px center; /* Move o plano de fundo para a direita e centraliza verticalmente */
     margin: 0;
@@ -117,4 +117,3 @@ body {
 .icon:hover i {
     transform: scale(1.4); /* Aumenta o tamanho do ícone ao passar o mouse */
 }
-

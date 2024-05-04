@@ -33,21 +33,6 @@ header {
     background-color: #000;
 }
 
-.menu-btn {
-    position: absolute;
-    right: 7%;
-    width: 2%;
-    height: 2%;
-    background: transparent;
-    color: #000;
-    border: none;
-    cursor: pointer;
-}
-
-.menu-btn .material-icons {
-    font-size: 100px;
-}
-
 .logout-btn {
     padding: 10px 20px;
     background-color: #dc3545;
@@ -70,11 +55,12 @@ header {
 
 .realizar-carga-btn {
     padding: 15px 30px;
-    background-color: #9e9e9e;
+    background-color: rgb(70, 130, 180);
     color: #000;
     border: none;
     cursor: pointer;
     position: relative;
+    font-size: 24px;
     border-radius: 20px;
     width: auto;
 }
@@ -82,7 +68,9 @@ header {
 .material-icons {
     vertical-align: middle;
     color: #000;
+    font-size:40px !important; /* Adicione !important para garantir prioridade */
 }
+
 
 .painel {
     display: none;
@@ -235,4 +223,15 @@ header {
 /* CSS Style for the icon inside the button */
 .header-button i.material-icons {
     margin-right: 5px; /* Add some right margin to separate icon from text (adjust as needed) */
+}
+
+.centered-images {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#erro-404-img {
+    z-index: 1; /* Define a imagem "Erro 404" para ficar por cima da imagem "Blue Ball" */
 }

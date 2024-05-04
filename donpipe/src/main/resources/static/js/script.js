@@ -261,6 +261,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => console.error('Erro:', error));
     }
 });
+    
 
 function sendDataToBackend(data) {
     // You can use fetch or any other method to send data to the backend
@@ -354,6 +355,7 @@ function detectDelimiter(csvData) {
     }
     return null;
 }
+
 
 function removeHeader(csvData) {
     var lines = csvData.split('\n');
