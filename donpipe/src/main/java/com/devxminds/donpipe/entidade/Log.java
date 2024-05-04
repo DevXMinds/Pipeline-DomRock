@@ -6,9 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.CreationTimestamp;
 
-import java.time.Instant;
 import java.time.LocalDate;
 
 @Getter
@@ -19,21 +17,25 @@ import java.time.LocalDate;
 @Table(name = "log", schema = "api_bd3")
 public class Log {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "log_id_gen")
-    @SequenceGenerator(name = "log_id_gen", sequenceName = "log_id_log_seq", schema = "api_bd3", allocationSize = 1)
+    @ColumnDefault("nextval('api_bd3.log_id_log_seq')")
     @Column(name = "id_log", nullable = false)
-    private Integer id;
+    private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_user", nullable = false)
     private User idUser;
 
-    @CreationTimestamp
-    @Column(name = "log_date")
-    private LocalDate logDate;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_arquivo")
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "id_arquivo", nullable = false)
     private Arquivo idArquivo;
+
+    @Column(name = "data_insercao")
+    private LocalDate dataInsercao;
+
+    @Column(name = "data_edicao")
+    private LocalDate dataEdicao;
+
+    @Column(name = "estagio", length = Integer.MAX_VALUE)
+    private String estagio;
 
 }

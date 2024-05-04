@@ -35,6 +35,7 @@ public class User {
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "permissao", nullable = false)
+    @ColumnDefault("lz")
     private Permissao permissao;
 
 }
