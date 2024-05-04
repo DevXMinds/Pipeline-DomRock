@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.devxminds.donpipe.dto.EmpresaDto;
-import com.devxminds.donpipe.entidade.*;
 import com.devxminds.donpipe.service.*;
 
 import java.util.List;
@@ -25,6 +24,7 @@ public class WebPageController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("login"); // Define o nome da view
         mv.addObject("user", new UserDto());
+        mv.addObject("userlogin", new UserDto());
         List<EmpresaDto> empresas = empresaService.getAll();
         mv.addObject("empresas", empresas);
         return mv;

@@ -35,16 +35,5 @@ public class UserController {
         UserDto newUser = userService.newUser(userDto);
         return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(newUser);
     }
-    @GetMapping("/auth")
-    public String authenticateUser(UserDto userDto) {
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        User userFromDb = modelMapper.map(userService.getUserByEmail(userDto.getEmail()), User.class);
-        if(encoder.matches(userDto.getSenha(), userFromDb.getSenha())){
-            return "login";
-        } else {
-            return "redirect:/login";
-        }
-
-    }
 
 }

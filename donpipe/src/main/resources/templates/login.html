@@ -26,12 +26,12 @@
         </div>
 
         <div class="back-layer">
-            <form class="login-form" th:object="${user}" th:action="@{/user/auth}">
+            <form class="login-form" th:object="${userlogin}" th:action="@{/auth/login}" method="post">
                 <h2>Login</h2>
                 <label for="lemail">Email</label>
-                <input type="email" id="lemail" placeholder="pessoa@email.com">
+                <input type="email" id="lemail" th:field="*{email}" placeholder="pessoa@email.com">
                 <label for="lpassword">Senha</label>
-                <input type="password" id="lpassword" placeholder="********">
+                <input type="password" id="lpassword" th:field="*{senha}" placeholder="********">
                 <button type="submit">Login</button>
             </form>
 
