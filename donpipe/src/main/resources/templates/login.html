@@ -26,29 +26,32 @@
         </div>
 
         <div class="back-layer">
-            <form action="" class="login-form active">
+            <form class="login-form" th:object="${userlogin}" th:action="@{/auth/login}" method="post">
                 <h2>Login</h2>
                 <label for="lemail">Email</label>
-                <input type="email" id="lemail" placeholder="pessoa@email.com">
+                <input type="email" id="lemail" th:field="*{email}" placeholder="pessoa@email.com">
                 <label for="lpassword">Senha</label>
-                <input type="password" id="lpassword" placeholder="********">
-                <button type="button">Login</button>
+                <input type="password" id="lpassword" th:field="*{senha}" placeholder="********">
+                <button type="submit">Login</button>
             </form>
-        
 
-            <form action="" class="cadastro-form">
+            <form class="cadastro-form" th:object="${user}" th:action="@{/user/createUser}"  method="post">
+                
                 <h2>Cadastre-se</h2>
-                <label for="f-name">Nome Completo</label> 
-                <input type="text" id="f-name" placeholder="Nome">
-                <label for="semail">Email</label>
-                <input type="text" id="email" placeholder="pessoa@email.com">
+                <label for="f-nome_user">Nome Completo</label>
+                <input th:field="*{nomeUser}" type="text" id="f-nome_user" placeholder="Nome">
+
+                <label for="email">Email</label>
+                <input th:field="*{email}" type="text" id="email" placeholder="pessoa@email.com">
+
                 <label for="spassword">Senha</label>
-                <input type="password" id="spassword" placeholder="*********">
+                <input type="password" th:field="*{senha}" id="spassword" placeholder="*********">
+
                 <label for="empresa">Empresa</label>
-                <select id="empresa">
-                    <option value="opcao1">Opção 1</option>
+                <select th:field="*{idEmpresa}" name="empresaId" id="empresa">
+                    <option th:each="empresa:${empresas}" th:value="${empresa.id}" th:text="${empresa.nome}"></option>
                 </select>
-                <button type="button">Cadastre-se</button>
+                <button type="submit" value="Add User">Cadastre-se</button>
             </form>
         </div>
         
@@ -56,6 +59,6 @@
     <div id="logo">
         <img width="40%" height="40%" src="/images/Don_Pipe.png" alt="logo">
     </div>
-    <script src="/js/scriptLogin"></script>
+    <script src="/js/scriptLogin.js"></script>
 </body>
 </html>

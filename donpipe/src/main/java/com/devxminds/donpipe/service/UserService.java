@@ -21,9 +21,12 @@ public class UserService {
     private PermissaoRepository permissaoRepository;
     @Autowired
     private ModelMapper modelMapper;
+    @Autowired
+    private PermissaoRepository permissaoRepository;
 
     public UserDto newUser(UserDto userDto) {
         User user = modelMapper.map(userDto, User.class);
+        user.setPermissao(permissaoRepository.findById("lz").get());
         user = userRepository.save(user);
         return userDto;
     }
@@ -44,5 +47,13 @@ public class UserService {
         user.get().setPermissao(permissao);
         userRepository.save(user.get());
         return user;
+
+    public UserDto getUserByEmail(String email) {
+        Optional<User> user = userRepository.findByEmail(email);
+        if (user.isPresent()) {
+            return modelMapper.map(user.get(), UserDto.class);
+        } else {
+            throw new NoSuchElementException("Nenhum usuário cadastrado com o email: " + email);
+        }
     }
 }

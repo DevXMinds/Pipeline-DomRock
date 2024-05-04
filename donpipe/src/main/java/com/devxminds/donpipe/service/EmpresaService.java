@@ -7,8 +7,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class EmpresaService {
@@ -31,5 +33,12 @@ public class EmpresaService {
         } else {
             throw new NoSuchElementException("Empresa não encontrada com o id: " + id);
         }
+    }
+
+    public List<EmpresaDto> getAll() {
+        List<Empresa> empresas = empresaRepository.findAll();
+        return empresas.stream()
+                .map(empresa -> modelMapper.map(empresa, EmpresaDto.class))
+                .collect(Collectors.toList());
     }
 }
