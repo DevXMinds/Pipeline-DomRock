@@ -37,4 +37,11 @@ public class WebPageController {
         mv.setViewName("index"); // Define o nome da view
         return mv;
     }
+
+    @GetMapping("/bronze")
+    public ModelAndView bronze() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("bronze");
+        return mv;
+    }
 }

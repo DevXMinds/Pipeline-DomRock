@@ -8,8 +8,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -51,10 +53,12 @@ public class ArquivoService {
         }
     }
 
-    public ArquivoDto getByEstagio(String estagio) {
-        Optional<Arquivo> arquivo = arquivoRepository.findAllByEstagio(estagio);
-        if (arquivo.isPresent()) {
-            return modelMapper.map(arquivo.get(), ArquivoDto.class);
+    public List<ArquivoDto> getAllByEstagio(String estagio) {
+        List<Arquivo> arquivos = arquivoRepository.findAllByEstagio(estagio);
+        if (!arquivos.isEmpty()) {
+            return arquivos.stream()
+                    .map(arquivo -> modelMapper.map(arquivo, ArquivoDto.class))
+                    .collect(Collectors.toList());
         } else {
             throw new NoSuchElementException("Arquivos não encontrados com o Estágio:" +estagio);
         }

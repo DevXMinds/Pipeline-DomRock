@@ -13,6 +13,8 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 /**
@@ -80,6 +82,16 @@ public class ArquivoController {
             logService.saveLog(new LogDto(null,arquivoOptional.get().getIdUser(),null, modelMapper.map(arquivoOptional.get(), Arquivo.class)));
             return ResponseEntity.ok(arquivoOptional.get());
         } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/byEstagio/{estagio}")
+    public ResponseEntity<List<ArquivoDto>> getAllLzStage(@PathVariable String estagio) {
+        try {
+            List<ArquivoDto> arquivosDto = arquivoService.getAllByEstagio(estagio);
+            return ResponseEntity.ok(arquivosDto);
+        } catch (NoSuchElementException e) {
             return ResponseEntity.notFound().build();
         }
     }

@@ -4,6 +4,7 @@ import com.devxminds.donpipe.entidade.Arquivo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -27,5 +28,5 @@ public interface ArquivoRepository extends JpaRepository<Arquivo, Long> {
      */
     Optional<Arquivo> findTopByOrderByIdDesc();
 
-    Optional<Arquivo> findAllByEstagio(String estagio);
+    List<Arquivo> findAllByEstagio(String estagio);
 }

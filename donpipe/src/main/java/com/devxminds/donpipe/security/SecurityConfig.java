@@ -45,7 +45,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()  // Allow access to static resources
                         .requestMatchers(HttpMethod.POST,"/auth/login").permitAll()
-                        .anyRequest().authenticated())
+                        .anyRequest().permitAll())
 
                 .formLogin(form -> form
                             .loginPage(LOGIN_PAGE_URL).permitAll()
