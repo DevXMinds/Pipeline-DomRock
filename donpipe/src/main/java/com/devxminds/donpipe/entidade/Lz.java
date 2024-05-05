@@ -1,5 +1,6 @@
 package com.devxminds.donpipe.entidade;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,6 +25,7 @@ public class Lz {
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JsonBackReference
     @JoinColumn(name = "id_arquivo", nullable = false)
     private Arquivo idArquivo;
     

@@ -53,8 +53,8 @@ public class ArquivoService {
         }
     }
 
-    public List<ArquivoDto> getAllByEstagio(String estagio) {
-        List<Arquivo> arquivos = arquivoRepository.findAllByEstagio(estagio);
+    public List<ArquivoDto> getAllPlusLzByEstagio(String estagio) {
+        List<Arquivo> arquivos = arquivoRepository.findAllByEstagioWithLz(estagio);
         if (!arquivos.isEmpty()) {
             return arquivos.stream()
                     .map(arquivo -> modelMapper.map(arquivo, ArquivoDto.class))

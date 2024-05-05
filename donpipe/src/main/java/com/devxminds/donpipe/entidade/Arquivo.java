@@ -1,5 +1,6 @@
 package com.devxminds.donpipe.entidade;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
@@ -39,6 +40,7 @@ public class Arquivo {
     private User idUser;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JsonBackReference
     @JoinColumn(name = "id_empresa", referencedColumnName = "id", nullable = false)
     private Empresa idEmpresa;
 

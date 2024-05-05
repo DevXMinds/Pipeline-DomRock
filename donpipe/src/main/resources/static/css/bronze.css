@@ -45,3 +45,57 @@
     padding: 10px;
     text-align: left;
 }
+
+.modal-content th {
+    background-color: #f4f4f4; /* Light grey background for headers */
+    position: relative; /* Positioning context for the close button */
+}
+
+.modal-content th:hover .close-col {
+    display: block; /* Only show close button on hover */
+}
+
+.close-col {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    color: red;
+    font-weight: bold;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+select {
+    padding: 5px 10px;
+    margin-top: 5px; /* Give some space from the top */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+}
+
+.primary-key {
+    background-color: #ffff99; /* Light yellow background for emphasis */
+}
+
+.primary-key .close-col {
+    display: none; /* Hide the close button for the primary key column */
+}
+

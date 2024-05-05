@@ -89,7 +89,7 @@ public class ArquivoController {
     @GetMapping("/byEstagio/{estagio}")
     public ResponseEntity<List<ArquivoDto>> getAllLzStage(@PathVariable String estagio) {
         try {
-            List<ArquivoDto> arquivosDto = arquivoService.getAllByEstagio(estagio);
+            List<ArquivoDto> arquivosDto = arquivoService.getAllPlusLzByEstagio(estagio);
             return ResponseEntity.ok(arquivosDto);
         } catch (NoSuchElementException e) {
             return ResponseEntity.notFound().build();

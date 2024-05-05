@@ -23,7 +23,7 @@ function displayArquivos(arquivos) {
             <p><strong>Nome do Upload:</strong> ${arquivo.nomeUpload}</p>
             <p><strong>Estágio:</strong> ${arquivo.estagio}</p>
         `;
-        div.onclick = function() { openModal(arquivo); }
+        div.addEventListener('click', function() { openModal(arquivo); });
         container.appendChild(div);
     });
 }
@@ -41,36 +41,35 @@ function openModal(arquivo) {
     const table = document.getElementById('csvTable');
     table.innerHTML = ''; // Clear previous table contents
 
-    // Get the correct delimiter
     const delimiter = arquivo.delimiter;
-
-    // Parse CSV data using the provided delimiter
     const rows = arquivo.dadosArquivo.split('\n');
     let html = '<tr>';
 
+    const pkColumnIndex = (arquivo.lzs && arquivo.lzs.length > 0 && arquivo.lzs[0].colunaPk !== undefined) ? arquivo.lzs[0].colunaPk : -1;
+
     // Handle the header separately if there is one
     if (arquivo.header) {
-        rows[0].split(delimiter).forEach(header => {
-            html += `<th contenteditable='true'>${header.trim()}</th>`; // Use trim to clean any whitespace
+        rows[0].split(delimiter).forEach((header, index) => {
+            const isPkColumn = index === pkColumnIndex;
+            html += `<th${isPkColumn ? ' class="pk-column"' : ''}>${header.trim()}
+                    ${!isPkColumn ? `<span class="close-col" onclick="deleteColumn(${index})">X</span>` : ''}
+                    <select id="type-${index}" onchange="setType(${index})">
+                        <option value="INT">INT</option>
+                        <option value="DATE">DATE</option>
+                        <option value="DATETIME">DATETIME</option>
+                        <option value="VARCHAR">VARCHAR</option>
+                        <option value="BINARY">BINARY</option>
+                        <option value="BLOB">BLOB</option>
+                    </select>
+                 </th>`;
         });
         html += '</tr>';
-        rows.slice(1).forEach(row => {
-            html += '<tr>';
-            row.split(delimiter).forEach(cell => {
-                html += `<td>${cell.trim()}</td>`; // Use trim to clean any whitespace
-            });
-            html += '</tr>';
-        });
     } else {
-        // If no header, create an empty header row
-        rows[0].split(delimiter).forEach(() => {
-            html += '<th contenteditable="true"></th>';
-        });
-        html += '</tr>';
-        rows.forEach(row => {
+        rows.forEach((row, rowIndex) => {
             html += '<tr>';
-            row.split(delimiter).forEach(cell => {
-                html += `<td>${cell.trim()}</td>`;
+            row.split(delimiter).forEach((cell, index) => {
+                const isPkColumn = index === pkColumnIndex;
+                html += `<td${isPkColumn ? ' class="pk-column"' : ''}>${cell.trim()}</td>`;
             });
             html += '</tr>';
         });
@@ -78,6 +77,7 @@ function openModal(arquivo) {
 
     table.innerHTML = html;
     modal.style.display = "block";
+    attachModalCloseHandlers(modal, span);
 
     // Close modal when X is clicked
     span.onclick = function() {
@@ -106,3 +106,30 @@ function openModal(arquivo) {
     };
 }
 
+function deleteColumn(colIndex) {
+    const table = document.getElementById('csvTable');
+    Array.from(table.rows).forEach(row => {
+        if (row.cells[colIndex]) row.deleteCell(colIndex);
+    });
+}
+
+function setType(colIndex, type) {
+    const selectedType = document.getElementById(`type-${colIndex}`).value;
+    console.log(`Type of column ${colIndex} set to ${selectedType}`);
+}
+
+function attachModalCloseHandlers(modal) {
+    const span = modal.querySelector(".close");
+
+    // Close modal when X is clicked
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // Close modal when clicking outside of it
+    window.onclick = function(event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    }
+}
