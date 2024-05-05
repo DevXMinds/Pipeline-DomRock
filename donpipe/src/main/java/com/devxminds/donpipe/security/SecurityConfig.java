@@ -3,16 +3,16 @@ package com.devxminds.donpipe.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 
 import java.util.Optional;
@@ -20,6 +20,8 @@ import java.util.Optional;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+    @Autowired
+    JwtAuthorizationFilter jwtAuthorizationFilter;
 
     private static final String LOGIN_PAGE_URL = "/login";
     private static final String LOGIN_PROCESSING_URL = "/auth/login";
@@ -30,41 +32,26 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http.csrf(csrf -> csrf.disable())
-                .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .build();
-    }
-
-    @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception {
-//        CustomAuthenticationFilter customFilter = new CustomAuthenticationFilter();
-//        customFilter.setAuthenticationManager(authenticationManager);
-//            http
-//                    .csrf(AbstractHttpConfigurer::disable)
-//                    .authorizeHttpRequests(authz -> authz
-//                            .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()  // Allow access to static resources
-//                            .requestMatchers("/auth/login").permitAll()
-//                            .requestMatchers("/createUser").permitAll()
-//                            .requestMatchers(LOGIN_PAGE_URL).permitAll()
-//                            .requestMatchers("/index").authenticated()
-//                            .anyRequest().authenticated())
-//
-//
-//                    .formLogin(form -> form
-//                            .loginPage(LOGIN_PAGE_URL).permitAll()
-//                            .loginProcessingUrl(LOGIN_PROCESSING_URL).permitAll()
-//                            .defaultSuccessUrl("/index",true)
-//                            .permitAll()
-//                    );
-//            return http
-//                    .build();
-//    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        return http.csrf(csrf -> csrf.disable())
+                .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
+                .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(authz -> authz
+                        .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()  // Allow access to static resources
+                        .requestMatchers(HttpMethod.POST,"/auth/login").permitAll()
+                        .anyRequest().authenticated())
+
+                .formLogin(form -> form
+                            .loginPage(LOGIN_PAGE_URL).permitAll()
+                            .defaultSuccessUrl("/index"))
+                .build();
+    }
 
 }
 

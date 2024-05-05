@@ -21,6 +21,10 @@ public class UserController {
     @Autowired
     private ModelMapper modelMapper;
 
+    public User getUserByEmail(String email) {
+        return modelMapper.map(userService.getUserByEmail(email), User.class);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
         UserDto userDto = userService.findUserById(id);

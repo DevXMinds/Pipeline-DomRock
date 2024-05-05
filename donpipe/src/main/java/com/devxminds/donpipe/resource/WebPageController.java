@@ -1,6 +1,7 @@
 package com.devxminds.donpipe.resource;
 
 import com.devxminds.donpipe.dto.UserDto;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,6 +20,7 @@ public class WebPageController {
     @Autowired
     private UserService userService;
 
+    @Bean
     @GetMapping("/login")
     public ModelAndView login() {
         ModelAndView mv = new ModelAndView();
