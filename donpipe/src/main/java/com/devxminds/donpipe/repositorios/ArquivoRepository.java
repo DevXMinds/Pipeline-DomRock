@@ -29,6 +29,7 @@ public interface ArquivoRepository extends JpaRepository<Arquivo, Long> {
      */
     Optional<Arquivo> findTopByOrderByIdDesc();
 
+
     @Query("SELECT a FROM Arquivo a JOIN a.lzs l WHERE a.estagio = :estagio")
     List<Arquivo> findAllByEstagioWithLz(String estagio);
 }
