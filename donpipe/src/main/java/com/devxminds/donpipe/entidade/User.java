@@ -1,5 +1,6 @@
 package com.devxminds.donpipe.entidade;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,10 +13,11 @@ import org.hibernate.annotations.ColumnDefault;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "\"user\"")
-public class User {
+@Table(name = "user", schema = "api_bd3")
+public class User{
     @Id
-    @ColumnDefault("nextval('api_bd3.user_id_seq'")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq_generator")
+    @SequenceGenerator(name = "user_seq_generator", sequenceName = "user_id_seq", schema = "api_bd3", allocationSize = 1)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -28,11 +30,14 @@ public class User {
     @Column(name = "senha", nullable = false, length = 100)
     private String senha;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JsonBackReference
     @JoinColumn(name = "id_empresa", nullable = false)
     private Empresa idEmpresa;
 
-    @Column(name = "setor", nullable = false, length = 100)
-    private String setor;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "permissao", nullable = false)
+    @ColumnDefault("lz")
+    private Permissao permissao;
 
 }

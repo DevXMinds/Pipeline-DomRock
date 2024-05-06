@@ -1,0 +1,68 @@
+<!--
+    Este arquivo contém o código HTML para a página de login do sistema.
+    Ele inclui um formulário deslizante com opções para login e cadastro.
+    O formulário de login possui campos para email e senha, além de um botão de login.
+    O formulário de cadastro possui campos para nome completo, email, senha, empresa e um botão de cadastro.
+    O arquivo também inclui o logotipo da aplicação.
+-->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>donpipe | login</title>
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+</head>
+<body>
+    <main>
+        <div class="cadastro">
+            <span>Ainda não é membro?</span> 
+            <button type="button">Cadastre-se</button>
+        </div>
+        
+        <div class="login">
+            <span>Já tem uma conta?</span> 
+            <button type="button">Login</button>
+        </div>
+
+        <div class="back-layer">
+            <form class="login-form" th:object="${userlogin}" th:action="@{/auth/login}" method="post">
+                <h2>Login</h2>
+                <label for="lemail">Email</label>
+                <input type="email" id="lemail" th:field="*{email}" placeholder="pessoa@email.com">
+                <label for="lpassword">Senha</label>
+                <input type="password" id="lpassword" th:field="*{senha}" placeholder="********">
+                <button type="submit">Login</button>
+                <script th:if="${redirectUrl}">
+                    // Redirect to the specified URL after successful login
+                    window.location.href = /*[[${redirectUrl}]]*/ '';
+                </script>
+            </form>
+
+            <form class="cadastro-form" th:object="${user}" th:action="@{/user/createUser}"  method="post">
+                
+                <h2>Cadastre-se</h2>
+                <label for="f-nome_user">Nome Completo</label>
+                <input th:field="*{nomeUser}" type="text" id="f-nome_user" placeholder="Nome">
+
+                <label for="email">Email</label>
+                <input th:field="*{email}" type="text" id="email" placeholder="pessoa@email.com">
+
+                <label for="spassword">Senha</label>
+                <input type="password" th:field="*{senha}" id="spassword" placeholder="*********">
+
+                <label for="empresa">Empresa</label>
+                <select th:field="*{idEmpresa}" name="empresaId" id="empresa">
+                    <option th:each="empresa:${empresas}" th:value="${empresa.id}" th:text="${empresa.nome}"></option>
+                </select>
+                <button type="submit" value="Add User">Cadastre-se</button>
+            </form>
+        </div>
+        
+    </main>
+    <div id="logo">
+        <img width="40%" height="40%" src="/images/Don_Pipe.png" alt="logo">
+    </div>
+    <script src="/js/scriptLogin.js"></script>
+</body>
+</html>

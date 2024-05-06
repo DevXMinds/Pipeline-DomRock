@@ -1,5 +1,9 @@
 package com.devxminds.donpipe.entidade;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
@@ -26,21 +30,32 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "arquivo")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@Table(name = "arquivo", schema = "api_bd3")
 public class Arquivo {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ColumnDefault("nextval('api_bd3.arquivo_id_seq'")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "arquivo_seq_generator")
+    @SequenceGenerator(name = "arquivo_seq_generator", sequenceName = "arquivo_id_seq", schema = "api_bd3", allocationSize = 1)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_user", referencedColumnName = "id", nullable = false)
     private User idUser;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JsonBackReference
     @JoinColumn(name = "id_empresa", referencedColumnName = "id", nullable = false)
     private Empresa idEmpresa;
+
+    @Column(name = "nome_upload", nullable = false)
+    private String nomeUpload;
+
+    @Column(name = "header", nullable = false)
+    private boolean header;
+
+    @Column(name = "delimiter", nullable = false)
+    private String delimiter;
 
     @Column(name = "tipo_arquivo", nullable = false, length = Integer.MAX_VALUE)
     private String tipoArquivo;
@@ -70,7 +85,7 @@ public class Arquivo {
     @OneToMany(mappedBy = "idArquivo")
     private Set<Log> logs = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "idArquivo")
-    private Set<Lz> lzs = new LinkedHashSet<>();
+    @OneToOne(mappedBy = "idArquivo")
+    private Lz lzs;
 
 }

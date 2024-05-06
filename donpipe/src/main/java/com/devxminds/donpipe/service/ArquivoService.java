@@ -4,10 +4,14 @@ import com.devxminds.donpipe.dto.ArquivoDto;
 import com.devxminds.donpipe.entidade.Arquivo;
 import com.devxminds.donpipe.repositorios.ArquivoRepository;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -21,28 +25,17 @@ import java.util.stream.Stream;
 public class ArquivoService {
     @Autowired
     public ArquivoRepository arquivoRepository;
+    @Autowired
+    private ModelMapper modelMapper;
 
     /**
-     * Armazena uma entidade Arquivo recebida.
+     * Armazena uma entidade Arquivo através da conversão de um ArquivoDto.
      * @param file objeto ArquivoDTO, desserialização do JSON recebido.
      * @return retorna o objeto Arquivo com os atributos do DTO serializado.
-     * @throws IOException falha de leitura ou busca
      */
-    public Arquivo store(ArquivoDto file) throws IOException {
-        Arquivo arquivo = new Arquivo(
-                file.id(),
-                file.idUser(),
-                file.idEmpresa(),
-                file.tipoArquivo(),
-                file.dadosArquivo(),
-                file.nomeArquivo(),
-                file.dataCriacao(),
-                file.estagio(),
-                file.estatus(),
-                file.dataModificacao(),
-                file.bronzes(),
-                file.logs(),
-                file.lzs());
+    public Arquivo store(ArquivoDto file) {
+        Arquivo arquivo = modelMapper.map(file, Arquivo.class);
+        arquivo = arquivoRepository.save(arquivo);
         return arquivo;
     }
 
@@ -51,8 +44,32 @@ public class ArquivoService {
      * @param id id do Arquivo
      * @return Arquivo com o id inserido
      */
-    public Arquivo getArquivo(Long id) {
-        return arquivoRepository.findById(id).get();
+    public ArquivoDto findById(Long id) {
+        Optional<Arquivo> arquivo = arquivoRepository.findById(id);
+        if (arquivo.isPresent()) {
+            return modelMapper.map(arquivo.get(), ArquivoDto.class);
+        } else {
+            throw new NoSuchElementException("Arquivo não encontrado com o id:" +id);
+        }
+    }
+
+    public List<ArquivoDto> getAllPlusLzByEstagio(String estagio) {
+        List<Arquivo> arquivos = arquivoRepository.findAllByEstagioWithLz(estagio);
+        if (!arquivos.isEmpty()) {
+            return arquivos.stream()
+                    .map(arquivo -> modelMapper.map(arquivo, ArquivoDto.class))
+                    .collect(Collectors.toList());
+        } else {
+            throw new NoSuchElementException("Arquivos não encontrados com o Estágio:" +estagio);
+        }
+    }
+
+    /**
+     * Busca o arquivo mais recente no repositório.
+     * @return Arquivo com o id mais recente
+     */
+    public Optional<Arquivo> getMostRecentArquivo() {
+        return arquivoRepository.findTopByOrderByIdDesc();
     }
 
     /**

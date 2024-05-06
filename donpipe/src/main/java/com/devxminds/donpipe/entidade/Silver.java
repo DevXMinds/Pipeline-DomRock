@@ -14,18 +14,19 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "silver")
+@Table(name = "silver", schema = "api_bd3")
 public class Silver {
     @Id
-    @ColumnDefault("nextval('api_bd3.silver_id_silver_seq'")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "silver_seq_generator")
+    @SequenceGenerator(name = "silver_seq_generator", sequenceName = "silver_id_seq", schema = "api_bd3", allocationSize = 1)
     @Column(name = "id_silver", nullable = false)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_user", nullable = false)
     private User idUser;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_arquivo", nullable = false)
     private Bronze idArquivo;
 
@@ -34,12 +35,6 @@ public class Silver {
 
     @Column(name = "data_modificacao")
     private LocalDate dataModificacao;
-
-    @Column(name = "pk", length = Integer.MAX_VALUE)
-    private String pk;
-
-    @Column(name = "notdeletable", length = Integer.MAX_VALUE)
-    private String notdeletable;
 
     @Column(name = "yaml", length = Integer.MAX_VALUE)
     private String yaml;

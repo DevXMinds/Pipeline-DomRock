@@ -45,15 +45,21 @@ document.addEventListener('DOMContentLoaded', function () {
                 const rows = csvContent.split('\n');
                 const postData = {
                     id: null,
-                    idUser: { id: 1 },
-                    idEmpresa: { id: 1 },
+                    idUser: { id: 1 }, //hardcoded
+                    idEmpresa: { id: 1 }, //hardcoded
+                    nomeUpload: "zezedica", //hardcoded
+                    header: true, // hardcoded
+                    delimiter: ";", //hardcoded
                     tipoArquivo: fileExtension,
                     dadosArquivo: csvContent,
                     nomeArquivo: fileName,
                     dataCriacao: null,
                     estagio: "lz",
-                    estatus: "cancelado",
-                    dataModificacao: null
+                    estatus: "cancelado", //hardcoded
+                    dataModificacao: null,
+                    bronzes: null,
+                    logs: null,
+                    lzs: null
                 };
 
                 // Send JSON data to backend

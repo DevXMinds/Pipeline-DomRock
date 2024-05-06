@@ -1,6 +1,7 @@
 package com.devxminds.donpipe.dto;
 
-import lombok.Value;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.*;
 
 import java.io.Serializable;
 
@@ -9,11 +10,15 @@ import java.io.Serializable;
  *<p>
  *DTO for {@link com.devxminds.donpipe.entidade.Empresa}
  *@author Caue
- *@version 0.1
+ *@version 1.0
  */
-@Value
-public class EmpresaDto implements Serializable {
-    Integer id;
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class EmpresaDto{
+    Long id;
     String nome;
     String setor;
 }

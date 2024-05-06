@@ -1,9 +1,6 @@
 package com.devxminds.donpipe.entidade;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,10 +12,11 @@ import org.hibernate.annotations.ColumnDefault;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "empresa")
+@Table(name = "empresa", schema = "api_bd3")
 public class Empresa {
     @Id
-    @ColumnDefault("nextval('api_bd3.empresa_id_seq'")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "empresa_seq_generator")
+    @SequenceGenerator(name = "empresa_seq_generator", sequenceName = "empresa_id_seq", schema = "api_bd3", allocationSize = 1)
     @Column(name = "id", nullable = false)
     private Long id;
 

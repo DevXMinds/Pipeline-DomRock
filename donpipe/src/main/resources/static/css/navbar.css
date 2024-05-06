@@ -1,0 +1,119 @@
+body {
+    margin: 0;
+}
+
+.navbar {
+    background-color: #ADD8E6; /* Azul claro */
+    color: #333; /* Cor do texto */
+    padding: 10px;
+    margin: 0;
+    display: flex; /* Utiliza flexbox para alinhar itens */
+    justify-content: space-between; /* Alinha os itens ao longo do espaço disponível */
+    align-items: center; /* Centraliza verticalmente */
+    position: relative; /* Adiciona posição relativa */
+}
+
+.navbar {
+    background-image: url('../images/img.png');
+    background-repeat: no-repeat;
+    background-position: right 250px center; /* Move o plano de fundo para a direita e centraliza verticalmente */
+    margin: 0;
+}
+
+
+
+.navbar-brand a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.navbar-nav {
+    list-style: none;
+    padding: 0;
+    display: flex; /* Utiliza flexbox para alinhar itens */
+}
+
+.nav-item {
+    margin-right: 30px; /* Adicionando espaço maior entre os itens */
+}
+
+.nav-item:last-child {
+    margin-right: 0; /* Remove a margem direita do último item */
+}
+
+.nav-button {
+    background-color: transparent;
+    border: 2px solid transparent; /* Reduzindo a espessura da borda */
+    color: #fff;
+    font-size: 18px;
+    padding: 12px 24px; /* Aumentando o padding para tornar o botão mais largo */
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, text-decoration 0.3s;
+    border-radius: 10px; /* Reduzindo o raio da borda */
+}
+
+.nav-button:hover {
+    background-color: #0f4979;
+    text-decoration: underline;
+}
+
+.icon img {
+    transition: transform 0.2s; /* Adiciona uma transição de transformação */
+}
+
+.icon:hover img {
+    transform: scale(1.2); /* Aumenta o tamanho do ícone ao passar o mouse */
+}
+
+.navbar-icons {
+    display: flex;
+    padding: 20px 100px; /* Aumentando a largura */
+    border-radius: 100px;
+    background: linear-gradient(to bottom, rgba(70, 130, 180, 0), #FFFFFF);
+}
+
+
+
+.navbar-icons::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px; /* Define a altura da linha */
+    background-color: black; /* Cor da linha */
+}
+
+.icon {
+    margin: 0 50px; /* Adiciona espaçamento horizontal entre os ícones */
+}
+
+.icon:first-child {
+    margin-left: 0; /* Remove a margem esquerda do primeiro ícone */
+}
+
+.icon:last-child {
+    margin-right: 0; /* Remove a margem direita do último ícone */
+}
+
+.icon i {
+    font-size: 32px;
+    border-radius: 50%; /* Adiciona borda arredondada */
+    padding: 10px; /* Adiciona um espaçamento dentro do círculo */
+    background-color: #65ade7; /* Azul escuro para os círculos */
+    color: #fff; /* Cor do ícone dentro do círculo */
+    transition: transform 0.2s; /* Adiciona uma transição de transformação */
+}
+
+#middle-icon i {
+    background-color: #CD7F32; /* Cor de bronze para a estrela do meio */
+}
+
+#right-icon i {
+    background-color: #C0C0C0; /* Prata para a estrela do lado direito */
+}
+
+.icon:hover i {
+    transform: scale(1.4); /* Aumenta o tamanho do ícone ao passar o mouse */
+}
