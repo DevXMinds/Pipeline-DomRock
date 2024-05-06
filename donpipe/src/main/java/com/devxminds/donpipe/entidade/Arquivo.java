@@ -1,6 +1,9 @@
 package com.devxminds.donpipe.entidade;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
@@ -27,6 +30,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Table(name = "arquivo", schema = "api_bd3")
 public class Arquivo {
     @Id
@@ -81,7 +85,7 @@ public class Arquivo {
     @OneToMany(mappedBy = "idArquivo")
     private Set<Log> logs = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "idArquivo")
-    private Set<Lz> lzs = new LinkedHashSet<>();
+    @OneToOne(mappedBy = "idArquivo")
+    private Lz lzs;
 
 }

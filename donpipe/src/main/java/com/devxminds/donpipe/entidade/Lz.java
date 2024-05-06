@@ -1,6 +1,9 @@
 package com.devxminds.donpipe.entidade;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,6 +19,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Table(name = "lz", schema = "api_bd3")
 public class Lz {
     @Id
@@ -24,8 +28,7 @@ public class Lz {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JsonBackReference
+    @OneToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_arquivo", nullable = false)
     private Arquivo idArquivo;
     

@@ -17,8 +17,6 @@ public class WebPageController {
 
     @Autowired
     private EmpresaService empresaService;
-    @Autowired
-    private UserService userService;
 
     @Bean
     @GetMapping("/login")

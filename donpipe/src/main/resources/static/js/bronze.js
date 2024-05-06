@@ -7,11 +7,9 @@ function fetchBronzeData() {
             return response.json();
         })
         .then(data => {
-            console.log(data)
             displayArquivos(data)})
         .catch(error => console.error('Error fetching data:', error));
 }
-
 // Function to display data on the page
 function displayArquivos(arquivos) {
     const container = document.getElementById('arquivo-container');
@@ -40,13 +38,13 @@ function openModal(arquivo) {
     const span = document.getElementsByClassName("close")[0];
     const table = document.getElementById('csvTable');
     table.innerHTML = ''; // Clear previous table contents
-
+    console.log(arquivo.pk);
     const delimiter = arquivo.delimiter;
     const rows = arquivo.dadosArquivo.split('\n');
     let html = '<tr>';
 
     const pkColumnIndex = (arquivo.lzs && arquivo.lzs.length > 0 && arquivo.lzs[0].colunaPk !== undefined) ? arquivo.lzs[0].colunaPk : -1;
-
+    const headers = arquivo.header ? rows[0].split(delimiter).map(header => header.trim()) : [];
     // Handle the header separately if there is one
     if (arquivo.header) {
         rows[0].split(delimiter).forEach((header, index) => {
@@ -91,12 +89,50 @@ function openModal(arquivo) {
         }
     }
 
-    // Confirm button actions
+    // Collect selected types when confirming
+    let selectedTypes = {};
     document.getElementById('confirmBtn').onclick = function() {
-        console.log('Confirm button clicked');
-        modal.style.display = "none";
-        // Implement any additional logic needed on confirmation here
-    };
+        const selects = document.querySelectorAll('select');
+        selects.forEach(select => {
+            const colIndex =  select.id.split('-')[1];
+            selectedTypes[headers[colIndex]] = select.value;
+        });
+        const postData = {
+            id: null,
+            idUser: { id: arquivo.idUser.id},
+            idArquivo: { id: arquivo.id }, //hardcoded
+            dataModificacao: null, //hardcoded
+            pk: arquivo.lzs.colunaPk, //hardcoded
+            naodeletavel: arquivo.lzs.notdeletable, // hardcoded
+            hash:null,
+            tipagemBronze: JSON.stringify(selectedTypes),
+        };
+
+        console.log(postData)
+        sendDataToBackend(postData)
+    }
+
+    function sendDataToBackend(data) {
+        // You can use fetch or any other method to send data to the backend
+        fetch('/bronze/load', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Data sent successfully');
+                    // Optionally, perform actions on successful data upload
+                } else {
+                    console.error('Failed to send data');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
 
     // Cancel button actions
     document.getElementById('cancelBtn').onclick = function() {

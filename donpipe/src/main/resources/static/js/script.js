@@ -49,14 +49,17 @@ document.addEventListener('DOMContentLoaded', function () {
                     idEmpresa: { id: 1 }, //hardcoded
                     nomeUpload: "zezedica", //hardcoded
                     header: true, // hardcoded
-                    delimiter: ",", //hardcoded
+                    delimiter: ";", //hardcoded
                     tipoArquivo: fileExtension,
                     dadosArquivo: csvContent,
                     nomeArquivo: fileName,
                     dataCriacao: null,
                     estagio: "lz",
                     estatus: "cancelado", //hardcoded
-                    dataModificacao: null
+                    dataModificacao: null,
+                    bronzes: null,
+                    logs: null,
+                    lzs: null
                 };
 
                 // Send JSON data to backend

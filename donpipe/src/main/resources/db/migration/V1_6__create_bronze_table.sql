@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS API_BD3.BRONZE
 CREATE OR REPLACE FUNCTION generate_hash()
     RETURNS TRIGGER AS $$
 BEGIN
-    NEW.hash_ := md5(NEW.id_user || NEW.id_bronze || NEW.data_modificacao::text);
+    NEW.hash_ := md5(NEW.id_user::text || NEW.id_bronze::text || NEW.data_modificacao::text);
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;

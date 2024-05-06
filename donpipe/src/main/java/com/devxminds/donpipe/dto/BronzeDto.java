@@ -16,6 +16,7 @@ import java.time.LocalDate;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class BronzeDto {
     private Long id;
+    private User idUser;
     private Arquivo idArquivo;
     private LocalDate dataModificacao;
     private String pk;
