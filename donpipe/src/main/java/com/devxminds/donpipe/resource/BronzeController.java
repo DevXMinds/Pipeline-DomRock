@@ -3,6 +3,7 @@ package com.devxminds.donpipe.resource;
 import com.devxminds.donpipe.dto.BronzeDto;
 import com.devxminds.donpipe.dto.LogDto;
 import com.devxminds.donpipe.entidade.Bronze;
+import com.devxminds.donpipe.service.ArquivoService;
 import com.devxminds.donpipe.service.BronzeService;
 import com.devxminds.donpipe.service.LogService;
 import org.modelmapper.ModelMapper;
@@ -22,6 +23,8 @@ public class BronzeController {
     private LogService logService;
     @Autowired
     private ModelMapper modelMapper;
+    @Autowired
+    private ArquivoService arquivoService;
 
     @PostMapping("/load")
     public ResponseEntity<Bronze> load(@RequestBody BronzeDto bronzeDto) {

@@ -7,9 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Optional;
 import java.util.List;
 
@@ -20,6 +18,10 @@ public class UserController {
     private UserService userService;
     @Autowired
     private ModelMapper modelMapper;
+
+    public User getUserByEmail(String email) {
+        return modelMapper.map(userService.getUserByEmail(email), User.class);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {

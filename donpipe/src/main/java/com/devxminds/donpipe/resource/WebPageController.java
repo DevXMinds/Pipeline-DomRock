@@ -1,6 +1,7 @@
 package com.devxminds.donpipe.resource;
 
 import com.devxminds.donpipe.dto.UserDto;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -16,9 +17,8 @@ public class WebPageController {
 
     @Autowired
     private EmpresaService empresaService;
-    @Autowired
-    private UserService userService;
 
+    @Bean
     @GetMapping("/login")
     public ModelAndView login() {
         ModelAndView mv = new ModelAndView();
@@ -33,6 +33,13 @@ public class WebPageController {
     public ModelAndView home() {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("index"); // Define o nome da view
+        return mv;
+    }
+
+    @GetMapping("/bronze")
+    public ModelAndView bronze() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("bronze");
         return mv;
     }
 }

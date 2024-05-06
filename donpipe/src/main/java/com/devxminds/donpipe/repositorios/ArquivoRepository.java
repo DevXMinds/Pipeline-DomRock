@@ -2,8 +2,10 @@ package com.devxminds.donpipe.repositorios;
 
 import com.devxminds.donpipe.entidade.Arquivo;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -27,5 +29,7 @@ public interface ArquivoRepository extends JpaRepository<Arquivo, Long> {
      */
     Optional<Arquivo> findTopByOrderByIdDesc();
 
-    Optional<Arquivo> findAllByEstagio(String estagio);
+
+    @Query("SELECT a FROM Arquivo a JOIN a.lzs l WHERE a.estagio = :estagio")
+    List<Arquivo> findAllByEstagioWithLz(String estagio);
 }

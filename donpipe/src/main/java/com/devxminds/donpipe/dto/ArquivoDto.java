@@ -1,23 +1,17 @@
 package com.devxminds.donpipe.dto;
 
-import com.devxminds.donpipe.entidade.*;
+import com.devxminds.donpipe.entidade.Empresa;
+import com.devxminds.donpipe.entidade.Lz;
+import com.devxminds.donpipe.entidade.User;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
- * Data Transfer Object (DTO) para objetos Arquivo. Serializa Jsons em Objetos ArquivoDTO.
- * <p>
- * DTO for {@link Arquivo}
- * <p>
- * [ATUALIZAÇÃO] Mudança de estrutura de record para class
- * @author Caue
- * @version 1.1
+ * DTO for {@link com.devxminds.donpipe.entidade.Arquivo}
  */
 @Getter
 @Setter
@@ -25,20 +19,20 @@ import java.util.Set;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ArquivoDto {
-    private Long id;
-    private User idUser;
-    private Empresa idEmpresa;
-    private String nomeUpload;
-    private boolean header;
-    private String delimiter;
-    private String tipoArquivo;
-    private String dadosArquivo;
-    private String nomeArquivo;
-    private LocalDate dataCriacao;
-    private String estagio;
-    private String estatus;
-    private LocalDate dataModificacao;
-    private Set<Bronze> bronzes = new LinkedHashSet<>();
-    private Set<Log> logs = new LinkedHashSet<>();
-    private Set<Lz> lzs = new LinkedHashSet<>();
+    Long id;
+    User idUser;
+    Empresa idEmpresa;
+    String nomeUpload;
+    boolean header;
+    String delimiter;
+    String tipoArquivo;
+    String dadosArquivo;
+    String nomeArquivo;
+    LocalDate dataCriacao;
+    String estagio;
+    String estatus;
+    LocalDate dataModificacao;
+    Set<BronzeDto> bronzes;
+    Set<LogDto> logs;
+    Lz lzs;
 }
