@@ -29,4 +29,16 @@ document.addEventListener("DOMContentLoaded", function() {
         document.querySelector('.nav-item #username-button').innerText = email;
     }
 
+    $.ajax({
+        type: 'POST',
+        url: '/user/login',
+        data: JSON.stringify(formData),
+        contentType: 'application/json',
+        success: function(response) {
+            // Atualiza o texto do botão "Nome do Usuário" com o nome de usuário recebido
+            usernameButton.text(response.nomeUser); // Supondo que o nome de usuário esteja disponível em response.nomeUser
+        },
+        error: function(xhr, status, error) {
+            console.error('Erro ao fazer login:', error);
+        }});
 });

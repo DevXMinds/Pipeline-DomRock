@@ -24,7 +24,8 @@ public class WebPageController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("login"); // Define o nome da view
         mv.addObject("user", new UserDto());
-        mv.addObject("userlogin", new UserDto());
+        UserDto userDto = new UserDto(null,null,null,null,null,null);
+        mv.addObject("userlogin", userDto);
         List<EmpresaDto> empresas = empresaService.getAll();
         mv.addObject("empresas", empresas);
         return mv;

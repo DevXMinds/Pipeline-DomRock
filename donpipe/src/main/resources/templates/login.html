@@ -26,13 +26,13 @@
         </div>
 
         <div class="back-layer">
-            <form class="login-form" th:object="${userlogin}">
+            <form class="login-form" th:object="${userlogin}" th:action="@{/user/login}" method="post">
                 <h2>Login</h2>
                 <label for="lemail">Email</label>
                 <input type="email" id="lemail" th:field="*{email}" placeholder="pessoa@email.com">
                 <label for="lpassword">Senha</label>
                 <input type="password" id="lpassword" th:field="*{senha}" placeholder="********">
-                <button type="button" onclick="redirectWithUsername()">Login</button>
+                <button type="submit">Login</button>
 
             </form>
 
@@ -65,7 +65,8 @@
         function redirectWithUsername() {
             // Captura o valor do campo de e-mail
             var email = document.getElementById("lemail").value;
-
+            var senha = document.getElementById("senha").value;
+            const loginho =
             // Redireciona para a página /bronze com o nome do usuário como parâmetro
             window.location.href = "/bronze?username=" + encodeURIComponent(email);
         }

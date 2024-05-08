@@ -5,11 +5,19 @@ import com.devxminds.donpipe.entidade.User;
 import com.devxminds.donpipe.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
 import java.util.Optional;
 import java.util.List;
+import org.mindrot.jbcrypt.BCrypt;
+
+
 
 @RestController
 @RequestMapping("/user")
@@ -48,9 +56,21 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
     }
-    @GetMapping("user/login")
-    public ResponseEntity<UserDto> login(@RequestParam String email, @RequestParam String password) {
-        
+    @PostMapping("/login")
+    public ResponseEntity<UserDto> login(UserDto userDto) {
+        User userBanco = modelMapper.map(userService.getUserByEmail(userDto.getEmail()),User.class);
+        if (BCrypt.checkpw(userDto.getSenha(), userBanco.getSenha())) {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setLocation(URI.create("/bronze?username=" + userBanco.getNomeUser()));
+            return new ResponseEntity<>(headers, HttpStatus.FOUND);
+//            return ResponseEntity.status(HttpStatus.FOUND)
+//                    .header("Location","/bronze")
+//                    .body(userDto);
+//            ResponseEntity.status(HttpStatus.FOUND)
+//                    .header("Location", "/bronze")
+//                    .body(responseUserDto);
+        }
+        return ResponseEntity.notFound().build();
 
     }
 }
