@@ -48,4 +48,9 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
     }
+    @GetMapping("user/login")
+    public ResponseEntity<UserDto> login(@RequestParam String email, @RequestParam String password) {
+        
+
+    }
 }

@@ -26,17 +26,14 @@
         </div>
 
         <div class="back-layer">
-            <form class="login-form" th:object="${userlogin}" th:action="@{/auth/login}" method="post">
+            <form class="login-form" th:object="${userlogin}">
                 <h2>Login</h2>
                 <label for="lemail">Email</label>
                 <input type="email" id="lemail" th:field="*{email}" placeholder="pessoa@email.com">
                 <label for="lpassword">Senha</label>
                 <input type="password" id="lpassword" th:field="*{senha}" placeholder="********">
-                <button type="submit">Login</button>
-                <script th:if="${redirectUrl}">
-                    // Redirect to the specified URL after successful login
-                    window.location.href = /*[[${redirectUrl}]]*/ '';
-                </script>
+                <button type="button" onclick="redirectWithUsername()">Login</button>
+
             </form>
 
             <form class="cadastro-form" th:object="${user}" th:action="@{/user/createUser}"  method="post">
@@ -64,5 +61,15 @@
         <img width="40%" height="40%" src="/images/Don_Pipe.png" alt="logo">
     </div>
     <script src="/js/scriptLogin.js"></script>
+    <script>
+        function redirectWithUsername() {
+            // Captura o valor do campo de e-mail
+            var email = document.getElementById("lemail").value;
+
+            // Redireciona para a página /bronze com o nome do usuário como parâmetro
+            window.location.href = "/bronze?username=" + encodeURIComponent(email);
+        }
+    </script>
+
 </body>
 </html>
